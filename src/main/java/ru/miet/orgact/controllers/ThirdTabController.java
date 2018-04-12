@@ -1,4 +1,4 @@
 package ru.miet.orgact.controllers;
 
-public class Controller {
+public class ThirdTabController {
 }
