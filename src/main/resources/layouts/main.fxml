@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" minWidth="500" minHeight="400" alignment="center" hgap="10" vgap="10"
-          xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ru.miet.orgact.controllers.MainController">
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121"
+            fx:controller="ru.miet.orgact.controllers.MainController">
     <children>
-        <TabPane prefWidth="1000" prefHeight="800" tabClosingPolicy="UNAVAILABLE">
+        <MenuBar depthTest="DISABLE" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="600.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TabPane layoutY="25.0" prefHeight="404.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Untitled Tab 1">
                     <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
@@ -22,10 +39,4 @@
             </tabs>
         </TabPane>
     </children>
-    <columnConstraints>
-        <ColumnConstraints/>
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints/>
-    </rowConstraints>
-</GridPane>
+</AnchorPane>
