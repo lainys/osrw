@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121"
@@ -27,13 +26,13 @@
         </MenuBar>
         <TabPane layoutY="25.0" prefHeight="404.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Untitled Tab 1">
+                <Tab text="Информация о публикации">
                     <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
                 </Tab>
-                <Tab text="Untitled Tab 2">
+                <Tab text="Журналы и конференции">
                     <fx:include fx:id="secondTabPage" source="second_tab.fxml"/>
                 </Tab>
-                <Tab text="Untitled Tab">
+                <Tab text="Индексирование">
                     <fx:include fx:id="thirdTabPage" source="third_tab.fxml"/>
                 </Tab>
             </tabs>
