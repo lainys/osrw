@@ -2,40 +2,45 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121"
             fx:controller="ru.miet.orgact.controllers.MainController">
     <children>
-        <MenuBar depthTest="DISABLE" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="600.0">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Close"/>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete"/>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About"/>
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-        <TabPane layoutY="25.0" prefHeight="404.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab text="Информация о публикации">
-                    <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
-                </Tab>
-                <Tab text="Журналы и конференции">
-                    <fx:include fx:id="secondTabPage" source="second_tab.fxml"/>
-                </Tab>
-                <Tab text="Индексирование">
-                    <fx:include fx:id="thirdTabPage" source="third_tab.fxml"/>
-                </Tab>
-            </tabs>
-        </TabPane>
+        <VBox>
+            <children>
+                <MenuBar depthTest="DISABLE" nodeOrientation="LEFT_TO_RIGHT">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Close"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About"/>
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <TabPane tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Информация о публикации">
+                            <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
+                        </Tab>
+                        <Tab text="Цитирование">
+                            <fx:include fx:id="thirdTabPage" source="third_tab.fxml"/>
+                        </Tab>
+                        <Tab text="Журналы и конференции">
+                            <fx:include fx:id="secondTabPage" source="second_tab.fxml"/>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>

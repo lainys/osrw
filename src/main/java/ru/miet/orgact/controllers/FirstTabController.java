@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import ru.miet.orgact.handlers.AddAuthorHandler;
 
 public class FirstTabController {
 
@@ -33,32 +34,17 @@ public class FirstTabController {
     private Button nextButton;
 
     @FXML
+    private Button addAuthor;
+
+    @FXML
     private GridPane grid;
+
 
     @FXML
     public void initialize() {
-
+        addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid));
     }
 
-    @FXML
-    public void button_add() {
-        int len = authorsFields.getChildren().size();
-
-        TextField text = new TextField();
-
-        text.setId("text");
-
-        authorsFields.getChildren().add(len - 1, text);
-
-        for (int i = 0; i < grid.getRowConstraints().size(); i++) {
-            if (i == 1) {
-                grid.getRowConstraints().get(i).setPrefHeight(grid.getRowConstraints().get(i).getPrefHeight() + 25);
-            }
-        }
-        grid.setPrefHeight(grid.getPrefHeight() + 25);
-        grid.setMaxHeight(grid.getPrefHeight());
-        grid.setMinHeight(grid.getPrefHeight());
-    }
 
     @FXML
     public void next_tab() {
