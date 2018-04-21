@@ -33,10 +33,10 @@
                             <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
                         </Tab>
                         <Tab text="Цитирование">
-                            <fx:include fx:id="thirdTabPage" source="third_tab.fxml"/>
+                            <fx:include fx:id="thirdTabPage" source="second_tab.fxml"/>
                         </Tab>
                         <Tab text="Журналы и конференции">
-                            <fx:include fx:id="secondTabPage" source="second_tab.fxml"/>
+                            <fx:include fx:id="secondTabPage" source="third_tab.fxml"/>
                         </Tab>
                     </tabs>
                 </TabPane>
