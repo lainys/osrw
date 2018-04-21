@@ -2,6 +2,7 @@ package ru.miet.orgact.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -31,18 +32,26 @@ public class FirstTabController {
     private TextField pagesField;
 
     @FXML
-    private Button nextButton;
-
-    @FXML
     private Button addAuthor;
 
     @FXML
     private GridPane grid;
 
+    @FXML
+    private ComboBox topic;
+
+    @FXML
+    private ComboBox position;
 
     @FXML
     public void initialize() {
+
         addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid));
+
+
+        position.getItems().addAll("Студент МИЭТ", "Аспирант МИЭТ", "Сотрудник МИЭТ", "Другое");
+        topic.getItems().addAll("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve");
+
     }
 
 

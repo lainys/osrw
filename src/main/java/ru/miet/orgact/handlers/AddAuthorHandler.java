@@ -3,8 +3,8 @@ package ru.miet.orgact.handlers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -25,7 +25,7 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
         this.authorsFields = parent;
         this.grid = grid;
 
-        buttonFont = new Font("Times new roman", 18);
+        buttonFont = new Font("Times new roman", 14);
         paddingAuthorBox = new Insets(0, 10, 0, 10);
     }
 
@@ -42,7 +42,7 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
 
         authorsFields.getChildren().add(len, getNextAuthorBox());
 
-        resize_grid(50);
+        resize_grid(30);
     }
 
 
@@ -61,18 +61,23 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
         HBox nextAuthor = new HBox();
         nextAuthor.setSpacing(spacingAuthorBox);
         nextAuthor.setPadding(paddingAuthorBox);
-        nextAuthor.setAlignment(Pos.CENTER_LEFT);
         nextAuthor.setPrefSize(200, 100);
 
         TextField textAuthor = new TextField();
-        textAuthor.setPrefSize(250, 25);
+        textAuthor.setPrefSize(140, 25);
+        textAuthor.setPromptText("Введите ФИО автора");
+
+        ComboBox positionBox = new ComboBox();
+        positionBox.getItems().addAll("Студент МИЭТ", "Аспирант МИЭТ", "Сотрудник МИЭТ", "Другое");
+        positionBox.setPromptText("Выберите должность");
+        positionBox.setPrefSize(170, 25);
 
         Button addAuthor = new Button("+");
         addAuthor.setPrefSize(80, 25);
         addAuthor.setFont(buttonFont);
         addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid));
 
-        nextAuthor.getChildren().addAll(textAuthor, addAuthor);//, deleteAuthor);
+        nextAuthor.getChildren().addAll(textAuthor, positionBox, addAuthor);//, deleteAuthor);
         return nextAuthor;
     }
 }

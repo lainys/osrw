@@ -22,7 +22,7 @@ public class DeleteAuthorHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         authorsFields.getChildren().remove(((Node) event.getSource()).getParent());
-        resize_grid(-50);
+        resize_grid(-30);
     }
 
     public void resize_grid(int k) {
