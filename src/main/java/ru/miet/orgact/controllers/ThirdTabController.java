@@ -31,7 +31,7 @@ public class ThirdTabController {
     public Node getLayout(String name) {
         try {
 
-            Parent root = FXMLLoader.load(getClass().getResource("/layouts/" + name + ".fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/layouts/place/" + name + ".fxml"));
             return root;
         } catch (IOException e) {
             e.printStackTrace();

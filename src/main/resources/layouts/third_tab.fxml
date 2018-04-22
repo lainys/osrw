@@ -30,8 +30,12 @@
                         </ButtonBar>
                     </children>
                 </AnchorPane>
-                <AnchorPane fx:id="placePanel">
+                <ScrollPane>
+                    <content>
+                        <AnchorPane fx:id="placePanel">
                 </AnchorPane>
+                    </content>
+                </ScrollPane>
             </items>
         </SplitPane>
     </children>
