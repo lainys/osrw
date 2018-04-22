@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -16,9 +17,10 @@ public class ThirdTabController {
     @FXML
     private AnchorPane placePanel;
 
+    @FXML
+    private SplitPane split;
 
     public void initialize() {
-
     }
 
     @FXML
