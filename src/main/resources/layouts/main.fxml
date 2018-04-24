@@ -2,11 +2,11 @@
 
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121"
-      fx:controller="ru.miet.orgact.controllers.MainController">
-    <children>
-        <MenuBar depthTest="DISABLE" nodeOrientation="LEFT_TO_RIGHT">
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121"
+            fx:controller="ru.miet.orgact.controllers.MainController">
+    <top>
+        <MenuBar depthTest="DISABLE" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
@@ -25,7 +25,9 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <TabPane tabClosingPolicy="UNAVAILABLE">
+    </top>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
                 <Tab text="Информация о публикации">
                     <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
@@ -38,5 +40,5 @@
                 </Tab>
             </tabs>
         </TabPane>
-    </children>
-</VBox>
+    </center>
+</BorderPane>

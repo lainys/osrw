@@ -7,7 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ThirdTabController {
 
     @FXML
-    private AnchorPane placePanel;
+    private BorderPane placePanel;
 
 
     public void initialize() {
@@ -24,8 +24,8 @@ public class ThirdTabController {
     @FXML
     public void selectPlace(ActionEvent event) {
         Node source = getLayout(((RadioButton) event.getSource()).getId());
-        placePanel.getChildren().clear();
-        placePanel.getChildren().add(source);
+
+        placePanel.setCenter(source);
     }
 
     public Node getLayout(String name) {

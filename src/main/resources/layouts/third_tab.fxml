@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
-      fx:controller="ru.miet.orgact.controllers.ThirdTabController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ru.miet.orgact.controllers.ThirdTabController">
     <children>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="600.0">
+        <HBox spacing="20.0">
             <children>
-                <ButtonBar layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="571.0">
-                    <buttons>
-                        <RadioButton fx:id="journal" mnemonicParsing="false" onAction="#selectPlace" text="Журнал">
-                            <toggleGroup>
-                                <ToggleGroup fx:id="placeGroup"/>
-                            </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="book" mnemonicParsing="false" onAction="#selectPlace" text="Книга"
-                                     toggleGroup="$placeGroup"/>
-                        <RadioButton fx:id="conference" mnemonicParsing="false" onAction="#selectPlace"
-                                     prefHeight="17.0" prefWidth="117.0" text="Конференция" toggleGroup="$placeGroup"/>
-                        <RadioButton fx:id="other" mnemonicParsing="false" onAction="#selectPlace" text="Другое"
-                                     toggleGroup="$placeGroup"/>
-                    </buttons>
-                </ButtonBar>
+                <RadioButton fx:id="journal" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#selectPlace"
+                             text="Журнал">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="placeGroup"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="book" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#selectPlace"
+                             text="Книга" toggleGroup="$placeGroup"/>
+                <RadioButton fx:id="conference" mnemonicParsing="false" onAction="#selectPlace" prefHeight="17.0"
+                             prefWidth="104.0" text="Конференция" toggleGroup="$placeGroup"/>
+                <RadioButton fx:id="other" mnemonicParsing="false" onAction="#selectPlace" text="Другое"
+                             toggleGroup="$placeGroup"/>
             </children>
-        </AnchorPane>
-        <ScrollPane fitToHeight="true" fitToWidth="true">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+        </HBox>
+        <Separator/>
+        <ScrollPane depthTest="DISABLE" fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent;">
             <content>
-                <AnchorPane fx:id="placePanel" prefHeight="342.0" prefWidth="598.0">
-                </AnchorPane>
+                <BorderPane fx:id="placePanel">
+                </BorderPane>
             </content>
         </ScrollPane>
     </children>
