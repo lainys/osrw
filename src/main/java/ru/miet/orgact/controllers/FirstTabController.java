@@ -54,9 +54,12 @@ public class FirstTabController {
 
     }
 
-
     @FXML
-    public void next_tab() {
+    public void nextTab() {
+
+    }
+
+    public void nextTab2() {
         String name = nameField.getText();
 
         if (!checkNameOfPublication(name)) {

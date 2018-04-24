@@ -1,41 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ru.miet.orgact.controllers.ThirdTabController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
+      fx:controller="ru.miet.orgact.controllers.ThirdTabController">
     <children>
-        <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="600.0">
             <children>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="63.0" prefWidth="600.0">
-                    <children>
-                        <ButtonBar layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="571.0">
-                            <buttons>
-                                <RadioButton fx:id="journal" mnemonicParsing="false" onAction="#selectPlace"
-                                             text="Журнал">
-                                    <toggleGroup>
-                                        <ToggleGroup fx:id="placeGroup"/>
-                                    </toggleGroup>
-                                </RadioButton>
-                                <RadioButton fx:id="book" mnemonicParsing="false" onAction="#selectPlace" text="Книга"
-                                             toggleGroup="$placeGroup"/>
-                                <RadioButton fx:id="conference" mnemonicParsing="false" onAction="#selectPlace"
-                                             prefHeight="17.0" prefWidth="117.0" text="Конференция"
-                                             toggleGroup="$placeGroup"/>
-                                <RadioButton fx:id="other" mnemonicParsing="false" onAction="#selectPlace" text="Другое"
-                                             toggleGroup="$placeGroup"/>
-                            </buttons>
-                        </ButtonBar>
-                    </children>
-                </AnchorPane>
-                <ScrollPane fitToHeight="true" fitToWidth="true">
-                    <content>
-                        <AnchorPane fx:id="placePanel" prefHeight="342.0" prefWidth="598.0">
-                </AnchorPane>
-                    </content>
-                </ScrollPane>
+                <ButtonBar layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="571.0">
+                    <buttons>
+                        <RadioButton fx:id="journal" mnemonicParsing="false" onAction="#selectPlace" text="Журнал">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="placeGroup"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="book" mnemonicParsing="false" onAction="#selectPlace" text="Книга"
+                                     toggleGroup="$placeGroup"/>
+                        <RadioButton fx:id="conference" mnemonicParsing="false" onAction="#selectPlace"
+                                     prefHeight="17.0" prefWidth="117.0" text="Конференция" toggleGroup="$placeGroup"/>
+                        <RadioButton fx:id="other" mnemonicParsing="false" onAction="#selectPlace" text="Другое"
+                                     toggleGroup="$placeGroup"/>
+                    </buttons>
+                </ButtonBar>
             </children>
-        </VBox>
+        </AnchorPane>
+        <ScrollPane fitToHeight="true" fitToWidth="true">
+            <content>
+                <AnchorPane fx:id="placePanel" prefHeight="342.0" prefWidth="598.0">
+                </AnchorPane>
+            </content>
+        </ScrollPane>
     </children>
-</AnchorPane>
+</VBox>

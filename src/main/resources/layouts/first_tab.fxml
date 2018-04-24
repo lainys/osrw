@@ -8,194 +8,186 @@
 <ScrollPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121"
             fx:controller="ru.miet.orgact.controllers.FirstTabController">
     <content>
-        <AnchorPane>
+
+        <GridPane fx:id="grid" alignment="TOP_CENTER" prefHeight="364.0" prefWidth="617.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.0" minWidth="10.0" prefWidth="150.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.0" minWidth="10.0" prefWidth="450.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
             <children>
-
-                <GridPane fx:id="grid" alignment="TOP_CENTER" prefHeight="364.0" prefWidth="617.0"
-                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                          AnchorPane.topAnchor="0.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.0" minWidth="10.0" prefWidth="150.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.0" minWidth="10.0" prefWidth="450.0"/>
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    </rowConstraints>
+                <Label text="Название">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="nameField" prefHeight="25.0" prefWidth="140.0"
+                           promptText="Введите название публикации" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </TextField>
+                <Label alignment="TOP_CENTER" text="Авторы" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <VBox fx:id="authorsFields" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT"
+                      GridPane.rowIndex="1">
                     <children>
-                        <Label text="Название">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0"/>
-                            </GridPane.margin>
-                        </Label>
-                        <TextField fx:id="nameField" prefHeight="25.0" prefWidth="140.0"
-                                   promptText="Введите название публикации" GridPane.columnIndex="1">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="10.0"/>
-                            </GridPane.margin>
-                        </TextField>
-                        <Label alignment="TOP_CENTER" text="Авторы" GridPane.rowIndex="1">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0"/>
-                            </GridPane.margin>
-                        </Label>
-                        <VBox fx:id="authorsFields" prefWidth="100.0" GridPane.columnIndex="1"
-                              GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                             <children>
-                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                                    <children>
-                                        <TextField fx:id="nameField" prefHeight="25.0" prefWidth="140.0"
-                                                   promptText="Введите ФИО автора"/>
-                                        <ComboBox fx:id="position" prefHeight="25.0" prefWidth="170.0"
-                                                  promptText="Выберите должность"/>
-                                        <Button fx:id="addAuthor" contentDisplay="TOP" mnemonicParsing="false"
-                                                prefHeight="20.0" prefWidth="80.0" text="+" textAlignment="CENTER">
-                                            <font>
-                                                <Font name="Times New Roman Bold" size="14.0"/>
-                                            </font>
-                                        </Button>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets/>
-                                    </VBox.margin>
-                                    <padding>
-                                        <Insets left="10.0" right="10.0"/>
-                                    </padding>
-                                </HBox>
+                                <TextField fx:id="nameField" prefHeight="25.0" prefWidth="140.0"
+                                           promptText="Введите ФИО автора"/>
+                                <ComboBox fx:id="position" prefHeight="25.0" prefWidth="170.0"
+                                          promptText="Выберите должность"/>
+                                <Button fx:id="addAuthor" contentDisplay="TOP" mnemonicParsing="false" prefHeight="20.0"
+                                        prefWidth="80.0" text="+" textAlignment="CENTER">
+                                    <font>
+                                        <Font name="Times New Roman Bold" size="14.0"/>
+                                    </font>
+                                </Button>
                             </children>
-                            <cursor>
-                                <Cursor fx:constant="DEFAULT"/>
-                            </cursor>
-                        </VBox>
-                        <Label text="Год" GridPane.rowIndex="2">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0"/>
-                            </GridPane.margin>
-                        </Label>
-                        <TextField fx:id="yearField" prefWidth="451.0" promptText="Введите год" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="2">
-                            <GridPane.margin>
+                            <VBox.margin>
+                                <Insets/>
+                            </VBox.margin>
+                            <padding>
                                 <Insets left="10.0" right="10.0"/>
-                            </GridPane.margin>
-                        </TextField>
-                        <Label text="Страна" GridPane.rowIndex="3">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0"/>
-                            </GridPane.margin>
-                        </Label>
-                        <TextField fx:id="countryField" promptText="Введите страну" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="3">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="10.0"/>
-                            </GridPane.margin>
-                        </TextField>
-                        <Label text="Город" GridPane.rowIndex="4">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0"/>
-                            </GridPane.margin>
-                        </Label>
-                        <TextField fx:id="cityField" promptText="Введите город" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="4">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="10.0"/>
-                            </GridPane.margin>
-                        </TextField>
-                        <Label text="Издательство" GridPane.rowIndex="5">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0"/>
-                            </GridPane.margin>
-                        </Label>
-                        <TextField fx:id="publicHouseField" promptText="Введите издательство" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="5">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="10.0"/>
-                            </GridPane.margin>
-                        </TextField>
-                        <Label text="Количество страниц" GridPane.rowIndex="6">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0"/>
-                            </GridPane.margin>
-                        </Label>
-                        <TextField fx:id="pagesField" promptText="Введите количество страниц" GridPane.columnIndex="1"
-                                   GridPane.rowIndex="6">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="10.0"/>
-                            </GridPane.margin>
-                        </TextField>
-                        <Label text="Раздел" GridPane.rowIndex="7">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0"/>
-                            </GridPane.margin>
-                        </Label>
-                        <ComboBox fx:id="topic" prefHeight="25.0" prefWidth="429.0" promptText="Выберите раздел"
-                                  GridPane.columnIndex="1" GridPane.rowIndex="7">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="10.0"/>
-                            </GridPane.margin>
-                        </ComboBox>
-                        <Label text="Направление" GridPane.rowIndex="8">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0"/>
-                            </GridPane.margin>
-                        </Label>
-                        <ComboBox prefHeight="25.0" prefWidth="429.0" promptText="Выберите направление"
-                                  GridPane.columnIndex="1" GridPane.rowIndex="8">
-                            <GridPane.margin>
-                                <Insets left="10.0" right="10.0"/>
-                            </GridPane.margin>
-                        </ComboBox>
-                        <Button fx:id="next" contentDisplay="TOP" mnemonicParsing="false" onAction="#next_tab"
-                                prefHeight="24.0" prefWidth="144.0" text="Далее" textAlignment="CENTER"
-                                GridPane.columnIndex="1" GridPane.rowIndex="12">
-                            <font>
-                                <Font name="Times New Roman Bold" size="18.0"/>
-                            </font>
-                            <GridPane.margin>
-                                <Insets left="10.0" right="10.0"/>
-                            </GridPane.margin>
-                        </Button>
+                            </padding>
+                        </HBox>
                     </children>
-                </GridPane>
-
+                    <cursor>
+                        <Cursor fx:constant="DEFAULT"/>
+                    </cursor>
+                </VBox>
+                <Label text="Год" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="yearField" prefWidth="451.0" promptText="Введите год" GridPane.columnIndex="1"
+                           GridPane.rowIndex="2">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </TextField>
+                <Label text="Страна" GridPane.rowIndex="3">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="countryField" promptText="Введите страну" GridPane.columnIndex="1"
+                           GridPane.rowIndex="3">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </TextField>
+                <Label text="Город" GridPane.rowIndex="4">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="cityField" promptText="Введите город" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </TextField>
+                <Label text="Издательство" GridPane.rowIndex="5">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="publicHouseField" promptText="Введите издательство" GridPane.columnIndex="1"
+                           GridPane.rowIndex="5">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </TextField>
+                <Label text="Количество страниц" GridPane.rowIndex="6">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="pagesField" promptText="Введите количество страниц" GridPane.columnIndex="1"
+                           GridPane.rowIndex="6">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </TextField>
+                <Label text="Раздел" GridPane.rowIndex="7">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <ComboBox fx:id="topic" prefHeight="25.0" prefWidth="429.0" promptText="Выберите раздел"
+                          GridPane.columnIndex="1" GridPane.rowIndex="7">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </ComboBox>
+                <Label text="Направление" GridPane.rowIndex="8">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <ComboBox prefHeight="25.0" prefWidth="429.0" promptText="Выберите направление" GridPane.columnIndex="1"
+                          GridPane.rowIndex="8">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </ComboBox>
+                <Button fx:id="next" contentDisplay="TOP" mnemonicParsing="false" onAction="#nextTab" prefHeight="24.0"
+                        prefWidth="144.0" text="Далее" textAlignment="CENTER" GridPane.columnIndex="1"
+                        GridPane.rowIndex="12">
+                    <font>
+                        <Font name="Times New Roman Bold" size="18.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </GridPane.margin>
+                </Button>
             </children>
-        </AnchorPane>
+        </GridPane>
     </content>
 </ScrollPane>

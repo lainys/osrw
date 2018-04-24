@@ -30,8 +30,9 @@ public class SecondTabController {
 
     }
 
-
-    public void initialize() {
+    @FXML
+    public void nextTab() {
 
     }
+
 }
