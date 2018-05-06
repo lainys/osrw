@@ -44,7 +44,11 @@ public class FirstTabController {
     private ComboBox position;
 
     @FXML
+    private ComboBox directions;
+
+    @FXML
     public void initialize() {
+
 
         addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid));
 
@@ -54,109 +58,12 @@ public class FirstTabController {
 
     }
 
-    @FXML
-    public void nextTab() {
+    public void fillArticle() {
+
 
     }
 
-    public void nextTab2() {
-        String name = nameField.getText();
-
-        if (!checkNameOfPublication(name)) {
-            sendError("Not correct Name");
-            return;
-        }
-
-        int len = authorsFields.getChildren().size() - 1;
-        String[] authors = new String[len];
-
-        for (int i = 0; i < len; i++) {
-            authors[i] = ((TextField) authorsFields.getChildren().get(i)).getText();
-        }
-
-        if (!checkAuthors(authors)) {
-            sendError("Not correct Authors");
-            return;
-        }
-
-        String year = yearField.getText();
-
-        if (!checkYear(year)) {
-            sendError("Not correct Year");
-            return;
-        }
-
-        String country = countryField.getText();
-
-        if (!checkCountry(country)) {
-            sendError("Not correct Country");
-            return;
-        }
-
-        String city = cityField.getText();
-
-        if (!checkCity(city)) {
-            sendError("Not correct City");
-            return;
-        }
-
-        String publicHouse = publicHouseField.getText();
-
-        if (!checkPublicHouse(publicHouse)) {
-            sendError("Not correct Public House");
-            return;
-        }
-
-        String pages = pagesField.getText();
-
-        if (!checkPages(pages)) {
-            sendError("Not correct Pages");
-            return;
-        }
-
-        sendToServer(name, authors, Integer.parseInt(year), country, city, publicHouse, Integer.parseInt(pages));
-
-    }
-
-    public void sendToServer(String name, String[] authors, int year, String country, String city, String publicHouse, int pages) {
-        System.out.println("Send to ... data:" +
-                "\n\tname:" + name +
-                ",\n\tcount authors:" + authors.length +
-                ",\n\tyear:" + Integer.toString(year) +
-                ",\n\tcountry:" + country +
-                ",\n\tcity:" + city +
-                ",\n\tpages:" + Integer.toString(pages));
-    }
-
-    public boolean checkNameOfPublication(String name) {
-        return true;
-    }
-
-    public boolean checkAuthors(String... authors) {
-        return true;
-    }
-
-    public boolean checkYear(String year) {
-        return true;
-    }
-
-    public boolean checkCountry(String country) {
-        return true;
-    }
-
-    public boolean checkCity(String city) {
-        return true;
-    }
-
-    public boolean checkPublicHouse(String publicHouse) {
-        return true;
-    }
-
-    public boolean checkPages(String pages) {
-        return true;
-    }
-
-    public void sendError(String message) {
+    public void showMessage(String message) {
         System.out.println(message);
     }
 
