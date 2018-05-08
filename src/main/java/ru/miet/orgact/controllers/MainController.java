@@ -153,9 +153,9 @@ public class MainController {
 
                 CheckBox name = (CheckBox) childs.get(i);
                 if (name.isSelected()) {
-                    Spinner value = (Spinner) childs.get(i + 1);
+                    TextField value = (TextField) childs.get(i + 1);
 
-                    citations.put(name.getText(), Integer.parseInt(value.getValue().toString()));
+                    citations.put(name.getText(), Integer.parseInt(value.getText()));
                 }
             }
             article.setCitations(citations);
@@ -166,7 +166,7 @@ public class MainController {
 
     public void showMessage(String s) {
 
-        System.out.println(s);
+        //System.out.println(s);
     }
 
     public void send() {
@@ -174,6 +174,9 @@ public class MainController {
         getFieldsFromFirstTab();
         getFieldsFromSecondTab();
         System.out.println(article.toJSON());
+        //Client client = new Client();
+        //client.sendMessage(article.toJSON());
+        //client.getMessage();
 
     }
 }

@@ -3,9 +3,9 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="282.0" prefWidth="412.0"
-          xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ru.miet.orgact.controllers.ThirdTabController">
+          xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ru.miet.orgact.controllers.JournalController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" prefWidth="188.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="221.0"/>
@@ -14,6 +14,7 @@
         <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="76.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES"/>
@@ -40,11 +41,12 @@
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </Label>
-        <Spinner editable="true" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <TextField fx:id="journalFactor" prefHeight="25.0" prefWidth="140.0" promptText="Введите импакт-фактор журнала"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane.margin>
-                <Insets left="10.0" right="10.0"/>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
-        </Spinner>
+        </TextField>
         <Label text="Интернет ссылка" GridPane.rowIndex="3">
             <font>
                 <Font size="14.0"/>
@@ -67,18 +69,32 @@
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </Label>
-        <TextField prefHeight="25.0" prefWidth="140.0" promptText="Введите страницы" GridPane.columnIndex="1"
-                   GridPane.rowIndex="2">
+        <TextField fx:id="journalPages" prefHeight="25.0" prefWidth="140.0" promptText="Введите страницы"
+                   GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
-        <CheckBox mnemonicParsing="false" text="ВАК" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <Label text="ISSN" GridPane.rowIndex="4">
+            <font>
+                <Font size="14.0"/>
+            </font>
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </GridPane.margin>
+        </Label>
+        <TextField fx:id="journalISSN" prefHeight="25.0" prefWidth="140.0" promptText="Ввведите ISSN"
+                   GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </GridPane.margin>
+        </TextField>
+        <CheckBox mnemonicParsing="false" text="ВАК" GridPane.columnIndex="1" GridPane.rowIndex="5">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </CheckBox>
-        <CheckBox mnemonicParsing="false" text="Российский" GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <CheckBox mnemonicParsing="false" text="Российский" GridPane.columnIndex="1" GridPane.rowIndex="6">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>

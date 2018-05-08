@@ -1,11 +1,13 @@
 package ru.miet.orgact.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import ru.miet.orgact.handlers.NumberListener;
 
 public class SecondTabController {
 
@@ -17,22 +19,30 @@ public class SecondTabController {
 
         int index = grid.getChildren().indexOf(event.getSource()) + 1;
 
-        Spinner spin = (Spinner) grid.getChildren().get(index);
+        TextField text = (TextField) grid.getChildren().get(index);
 
         if (((CheckBox) event.getSource()).isSelected()) {
-            spin.setDisable(false);
-            spin.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000));
+            text.setDisable(false);
+            text.setText("0");
         } else {
-            spin.setDisable(true);
-            spin.decrement((Integer) spin.getValue());
+            text.setDisable(true);
+            text.setText("0");
         }
-
 
     }
 
-    @FXML
-    public void nextTab() {
+    public void initTextField() {
+        ObservableList<Node> list = grid.getChildren();
 
+        for (int i = 0; i < list.size(); i += 2) {
+            TextField text = (TextField) list.get(i + 1);
+            text.textProperty().addListener(new NumberListener(text));
+        }
+    }
+
+    @FXML
+    public void initialize() {
+        initTextField();
     }
 
 }

@@ -23,7 +23,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
                 <Label text="Название">
@@ -53,7 +52,7 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                             <children>
-                                <TextField fx:id="nameField" prefHeight="25.0" prefWidth="140.0"
+                                <TextField fx:id="authorField" prefHeight="25.0" prefWidth="140.0"
                                            promptText="Введите ФИО автора"/>
                                 <ComboBox fx:id="position" prefHeight="25.0" prefWidth="170.0"
                                           promptText="Выберите должность"/>
@@ -131,21 +130,7 @@
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label text="Количество страниц" GridPane.rowIndex="6">
-                    <font>
-                        <Font size="14.0"/>
-                    </font>
-                    <GridPane.margin>
-                        <Insets left="10.0"/>
-                    </GridPane.margin>
-                </Label>
-                <TextField fx:id="pagesField" promptText="Введите количество страниц" GridPane.columnIndex="1"
-                           GridPane.rowIndex="6">
-                    <GridPane.margin>
-                        <Insets left="10.0" right="10.0"/>
-                    </GridPane.margin>
-                </TextField>
-                <Label text="Раздел" GridPane.rowIndex="7">
+                <Label text="Раздел" GridPane.rowIndex="6">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -154,12 +139,12 @@
                     </GridPane.margin>
                 </Label>
                 <ComboBox fx:id="topic" prefHeight="25.0" prefWidth="429.0" promptText="Выберите раздел"
-                          GridPane.columnIndex="1" GridPane.rowIndex="7">
+                          GridPane.columnIndex="1" GridPane.rowIndex="6">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </ComboBox>
-                <Label text="Направление" GridPane.rowIndex="8">
+                <Label text="Направление" GridPane.rowIndex="7">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -168,7 +153,7 @@
                     </GridPane.margin>
                 </Label>
                 <ComboBox fx:id="directions" prefHeight="25.0" prefWidth="429.0" promptText="Выберите направление"
-                          GridPane.columnIndex="1" GridPane.rowIndex="8">
+                          GridPane.columnIndex="1" GridPane.rowIndex="7">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
