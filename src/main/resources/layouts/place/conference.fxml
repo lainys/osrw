@@ -28,7 +28,7 @@
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </Label>
-        <TextField prefHeight="25.0" prefWidth="140.0" promptText="Введите название конференции"
+        <TextField fx:id="conferenceName" prefHeight="25.0" prefWidth="140.0" promptText="Введите название конференции"
                    GridPane.columnIndex="1">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
@@ -42,7 +42,8 @@
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </Label>
-        <DatePicker prefHeight="25.0" promptText="Дата начала" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <DatePicker fx:id="conferenceStart" prefHeight="25.0" promptText="Дата начала" GridPane.columnIndex="1"
+                    GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
@@ -55,8 +56,8 @@
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </Label>
-        <DatePicker prefHeight="25.0" promptText="Дата окончания" showWeekNumbers="true" GridPane.columnIndex="1"
-                    GridPane.rowIndex="2">
+        <DatePicker fx:id="conferenceFinish" prefHeight="25.0" promptText="Дата окончания" showWeekNumbers="true"
+                    GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
@@ -97,8 +98,8 @@
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </Label>
-        <TextField prefHeight="25.0" prefWidth="140.0" promptText="Вставьте ссылку" GridPane.columnIndex="1"
-                   GridPane.rowIndex="6">
+        <TextField fx:id="conferenceLink" prefHeight="25.0" prefWidth="140.0" promptText="Вставьте ссылку"
+                   GridPane.columnIndex="1" GridPane.rowIndex="6">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>

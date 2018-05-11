@@ -73,7 +73,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <CheckBox mnemonicParsing="false" onAction="#changeEnable" text="ЯдроРИНЦ" GridPane.rowIndex="5">
+                <CheckBox mnemonicParsing="false" onAction="#changeEnable" text="Ядро РИНЦ" GridPane.rowIndex="5">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
@@ -83,7 +83,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <CheckBox mnemonicParsing="false" onAction="#changeEnable" text="GoogleScholar" GridPane.rowIndex="6">
+                <CheckBox mnemonicParsing="false" onAction="#changeEnable" text="Google Scholar" GridPane.rowIndex="6">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
@@ -93,7 +93,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <CheckBox mnemonicParsing="false" onAction="#changeEnable" text="ERIH_PLUS" GridPane.rowIndex="7">
+                <CheckBox mnemonicParsing="false" onAction="#changeEnable" text="ERIH PLUS" GridPane.rowIndex="7">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
@@ -103,7 +103,8 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <CheckBox mnemonicParsing="false" onAction="#changeEnable" text="CheckBox" GridPane.rowIndex="8">
+                <CheckBox mnemonicParsing="false" onAction="#changeEnable" text="Microsoft Academic"
+                          GridPane.rowIndex="8">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>

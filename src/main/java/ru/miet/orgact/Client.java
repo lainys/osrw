@@ -9,8 +9,12 @@ public class Client {
     private BufferedReader inMessage;
     private PrintWriter outMessage;
 
-    public Client() {
+    /*public Client() {
         connect("127.0.0.1", 9000);
+    }*/
+
+    public Client() {
+        connect("10.32.20.36", 9000);
     }
 
     public Client(String ip, int port) {
@@ -29,9 +33,7 @@ public class Client {
 
 
     public static void main(String[] args) {
-        Client client = new Client("127.0.0.1", 9000);
-        client.sendMessage("ТЕСТ!");
-        client.getMessage();
+        parseAnswerFromGet(getJournals());
     }
 
     public void sendMessage(String message) {
@@ -40,12 +42,46 @@ public class Client {
         outMessage.flush();
     }
 
-    public void getMessage() {
+    public static String parseAnswerFromGet(String answer) {
+        String pattern = "(\'(.*)\')";
+        if (answer.matches(pattern)) {
+            System.out.println(answer.matches(pattern));
+        }
+        return "";
+    }
+
+    public static String getEmployees() {
+        Client client = new Client();
+        client.sendMessage("{\'type\':\'get_info\',\'data\':{\'name\':\'Сотрудники\', \"fields\": [\"ФИО_сотрудника\"]}}");
+        return client.getMessage();
+    }
+
+    public static String getTopics() {
+        Client client = new Client();
+        client.sendMessage("{\'type\':\'get_info\',\'data\':{\'name\':\'Разделы\', \"fields\": [\"Наименование_раздела\"]}}");
+        return client.getMessage();
+    }
+
+    public static String getJournals() {
+        Client client = new Client();
+        client.sendMessage("{\'type\':\'get_info\',\'data\':{\'name\':\'Журналы\', \"fields\": [\"*\"]}}");
+        return client.getMessage();
+    }
+
+    public static String getConference() {
+        Client client = new Client();
+        client.sendMessage("{\'type\':\'get_info\',\'data\':{\'name\':\'Конференции\', \"fields\": [\"*\"]}}");
+        return client.getMessage();
+    }
+
+    public String getMessage() {
         try {
             System.out.println("Приём сообщения ");
-            System.out.println("Принято сообщение " + inMessage.readLine());
+            //System.out.println("Принято сообщение " + inMessage.readLine());
+            return inMessage.readLine();
         } catch (IOException e) {
             e.printStackTrace();
+            return "Не удалось получить ответ от сервера!";
         }
 
     }

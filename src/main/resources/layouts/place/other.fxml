@@ -24,7 +24,8 @@
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </Label>
-        <TextField prefHeight="26.0" prefWidth="160.0" promptText="Введите название ресурса" GridPane.columnIndex="1">
+        <TextField fx:id="otherName" prefHeight="26.0" prefWidth="160.0" promptText="Введите название ресурса"
+                   GridPane.columnIndex="1">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
@@ -37,8 +38,8 @@
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </Label>
-        <TextField prefHeight="25.0" prefWidth="140.0" promptText="Вставьте ссылку" GridPane.columnIndex="1"
-                   GridPane.rowIndex="1">
+        <TextField fx:id="otherLink" prefHeight="25.0" prefWidth="140.0" promptText="Вставьте ссылку"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>

@@ -1,48 +1,56 @@
 package ru.miet.orgact;
 
+import javafx.collections.ObservableList;
+
 import java.util.*;
 
 public class Article {
 
-    public ArrayList<String> authors;
+    private ArrayList<String> authors;
+    private ArrayList<String> positions;
     private String name;
     private Integer year;
     private String type;
     private String country;
     private String city;
-    private String publicHouse;
+    private String publishingHouse;
     private HashMap<String, Integer> citations;
     private String topic;
-    private ArrayList<String> directions;
+    private ArrayList<Integer> directions;
+    private String typeJson;
 
-    public Article(String name, ArrayList<String> authors, Integer year, String type, String country, String city, String publicHouse, HashMap<String, Integer> citations, String topic, ArrayList<String> directions) {
+    public Article(String name, ArrayList<String> authors, ArrayList<String> positions, Integer year, String type, String country, String city, String publishingHouse, HashMap<String, Integer> citations, String topic, ArrayList<Integer> directions) {
         this.name = name;
         this.authors = authors;
+        this.positions = positions;
         this.year = year;
         this.type = type;
         this.country = country;
         this.city = city;
-        this.publicHouse = publicHouse;
+        this.publishingHouse = publishingHouse;
         this.citations = citations;
         this.topic = topic;
         this.directions = directions;
+        this.typeJson = "";
     }
 
     public Article() {
         name = "";
         authors = new ArrayList<>();
+        positions = new ArrayList<>();
         year = Calendar.getInstance().get(Calendar.YEAR);
         type = "";
         country = "";
         city = "";
-        publicHouse = "";
+        publishingHouse = "";
         citations = new HashMap<>();
         topic = "";
         directions = new ArrayList<>();
+        typeJson = "";
     }
 
     public static void main(String[] args) {
-        Article article = new Article("dd", null, 1, "ssfd", "dfsfd", "dfs", "dfssdfs", null, "fgdg", null);
+        Article article = new Article("dd", null, null, 1, "ssfd", "dfsfd", "dfs", "dfssdfs", null, "fgdg", null);
         article.toJSON();
 
     }
@@ -54,7 +62,13 @@ public class Article {
         if (authors != null) {
             result += "\"authors\":{";
             for (int i = 0; i < authors.size(); i++) {
-                result += "\"" + i + "\":\"" + authors.get(i) + "\",";
+
+                result += "\"" + i + "\":{";
+
+                result += "\"fio\":\"" + authors.get(i) + "\",";
+                result += "\"position\":\"" + positions.get(i) + "\",";
+
+                result += "},";
             }
             result += "},";
         } else {
@@ -65,11 +79,13 @@ public class Article {
 
         result += "\"type\":\"" + type + "\",";
 
+        result += typeJson + "\",";
+
         result += "\"country\":\"" + country + "\",";
 
         result += "\"city\":\"" + city + "\",";
 
-        result += "\"publicHouse\":\"" + publicHouse + "\",";
+        result += "\"publishingHouse\":\"" + publishingHouse + "\",";
 
         if (citations != null) {
             result += "\"citations\":{";
@@ -77,7 +93,7 @@ public class Article {
             while (set.hasNext()) {
                 Map.Entry<String, Integer> next = set.next();
 
-                result += "\"" + next.getKey() + "\":\"" + next.getValue() + "\",";
+                result += "\"" + next.getKey() + "\":{\"have\":\"1\",\"citations\":\"" + next.getValue() + "\",}";
             }
 
             result += "},";
@@ -107,10 +123,12 @@ public class Article {
         this.name = name;
     }
 
-    public void addAuthors(String... authors) {
-        for (String author : authors) {
-            this.authors.add(author);
-        }
+    public void setAuthors(ArrayList<String> authors) {
+        this.authors.addAll(authors);
+    }
+
+    public void setPositions(ArrayList<String> positions) {
+        this.positions.addAll(positions);
     }
 
     public void setYear(int year) {
@@ -129,18 +147,29 @@ public class Article {
         this.city = city;
     }
 
-    public void setPublicHouse(String publicHouse) {
-        this.publicHouse = publicHouse;
+    public void setPublishingHouse(String publishingHouse) {
+        this.publishingHouse = publishingHouse;
     }
 
     public void setCitations(HashMap<String, Integer> map) {
         citations.putAll(map);
-
     }
 
-    public void setDirections(String... directions) {
-        for (String direct : directions) {
-            this.directions.add(direct);
+    public void setTypeJson(String type) {
+        typeJson = type;
+    }
+
+    public void setDirections(ObservableList<Integer> temp, int max) {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.addAll(temp);
+        directions.clear();
+        for (int i = 0; i < max; i++) {
+            if (list.contains(i)) {
+                list.remove((Integer) i);
+                directions.add(1);
+            } else {
+                directions.add(0);
+            }
         }
     }
 
