@@ -10,6 +10,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import org.controlsfx.control.textfield.TextFields;
+
+import java.util.ArrayList;
 
 public class AddAuthorHandler implements EventHandler<ActionEvent> {
 
@@ -17,13 +20,16 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
 
     Insets paddingAuthorBox;
     Font buttonFont;
+    ArrayList<String> list;
 
     private VBox authorsFields;
     private GridPane grid;
 
-    public AddAuthorHandler(VBox parent, GridPane grid) {
+    public AddAuthorHandler(VBox parent, GridPane grid, ArrayList employees) {
         this.authorsFields = parent;
         this.grid = grid;
+        this.list = new ArrayList<>();
+        list.addAll(employees);
 
         buttonFont = new Font("Times new roman", 14);
         paddingAuthorBox = new Insets(0, 10, 0, 10);
@@ -66,6 +72,7 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
         TextField textAuthor = new TextField();
         textAuthor.setPrefSize(140, 25);
         textAuthor.setPromptText("Введите ФИО автора");
+        TextFields.bindAutoCompletion(textAuthor, list);
 
         ComboBox positionBox = new ComboBox();
         positionBox.getItems().addAll("Студент МИЭТ", "Аспирант МИЭТ", "Сотрудник МИЭТ", "Другое");
@@ -75,7 +82,7 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
         Button addAuthor = new Button("+");
         addAuthor.setPrefSize(80, 25);
         addAuthor.setFont(buttonFont);
-        addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid));
+        addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid, list));
 
         nextAuthor.getChildren().addAll(textAuthor, positionBox, addAuthor);//, deleteAuthor);
         return nextAuthor;

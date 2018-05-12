@@ -14,7 +14,7 @@ public class NumberListener implements ChangeListener<String> {
 
     @Override
     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-        String numberMatcher = "^\\d+$";
+        String numberMatcher = "^\\d{0,6}$";
         if (!newValue.isEmpty()) {
             if (!newValue.matches(numberMatcher)) {
                 field.setText(oldValue);

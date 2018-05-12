@@ -7,9 +7,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
+import org.controlsfx.control.textfield.TextFields;
+import ru.miet.orgact.Client;
 import ru.miet.orgact.handlers.AddAuthorHandler;
 import ru.miet.orgact.handlers.StringListener;
 import ru.miet.orgact.handlers.YearFieldListener;
+
+import java.util.ArrayList;
 
 
 public class FirstTabController {
@@ -28,6 +32,10 @@ public class FirstTabController {
 
     @FXML
     private TextField cityField;
+
+
+    @FXML
+    private TextField authorField;
 
     @FXML
     private TextField publicHouseField;
@@ -83,17 +91,18 @@ public class FirstTabController {
         validationSupport.registerValidator(nameField, false, Validator.createEmptyValidator("Необходимо ввести название"));
 */
 
+
         yearField.textProperty().addListener(new YearFieldListener(yearField));
         countryField.textProperty().addListener(new StringListener(countryField));
         cityField.textProperty().addListener(new StringListener(cityField));
 
-        addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid));
-
+        ArrayList<String> employees = Client.getEmployees();
+        TextFields.bindAutoCompletion(authorField, employees);
+        addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid, employees));
 
         position.getItems().addAll("Студент МИЭТ", "Аспирант МИЭТ", "Сотрудник МИЭТ", "Другое");
         topic.getItems().addAll("Монографии", "Учебники и учебные пособия", "Учебно-методические пособия", "Статьи в зарубежных журналах", "Статьи в российских журналах", "Материалы докладов зарубежных научно-технических конференций", "Материалы докладов научно-технических конференций в России и СНГ", "Статьи в сборниках научных трудов", "Тезисы докладов");
         directions.getItems().addAll("Естественные и точные науки", "Техника и технологии", "Медицинские науки и общественное здравоохранение", "Социальные науки", "Гуманитарные науки");
-
 
     }
 
