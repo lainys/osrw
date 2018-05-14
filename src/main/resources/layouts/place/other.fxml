@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="128.0" prefWidth="368.0"
@@ -14,9 +13,10 @@
     <rowConstraints>
         <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Label text="Название ресурса">
+        <Label text="Название ресурса" GridPane.rowIndex="1">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -25,12 +25,12 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="otherName" prefHeight="26.0" prefWidth="160.0" promptText="Введите название ресурса"
-                   GridPane.columnIndex="1">
+                   GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
-        <Label text="Интернет ссылка" GridPane.rowIndex="1">
+        <Label text="Интернет ссылка" GridPane.rowIndex="2">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -39,10 +39,16 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="otherLink" prefHeight="25.0" prefWidth="140.0" promptText="Вставьте ссылку"
-                   GridPane.columnIndex="1" GridPane.rowIndex="1">
+                   GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
+        <Label alignment="CENTER" prefHeight="17.0" prefWidth="614.0" text="Заполните информацию о ресурсе"
+               textAlignment="CENTER" GridPane.columnSpan="2">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
     </children>
 </GridPane>

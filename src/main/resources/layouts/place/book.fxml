@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="234.0" prefWidth="513.0"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="280.0" prefWidth="516.0"
           xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ru.miet.orgact.controllers.BookController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="257.0"/>
@@ -16,9 +16,10 @@
         <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Label text="Название">
+        <Label text="Название" GridPane.rowIndex="1">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -27,12 +28,12 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="bookName" prefHeight="25.0" prefWidth="140.0" promptText="Введите название книги"
-                   GridPane.columnIndex="1">
+                   GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
-        <Label text="Издательство" GridPane.rowIndex="1">
+        <Label text="Издательство" GridPane.rowIndex="2">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -41,12 +42,12 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="bookPublicHouse" prefHeight="25.0" prefWidth="140.0" promptText="Введите издательство"
-                   GridPane.columnIndex="1" GridPane.rowIndex="1">
+                   GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
-        <Label text="ISBN" GridPane.rowIndex="2">
+        <Label text="ISBN" GridPane.rowIndex="3">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -55,12 +56,12 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="bookISBN" prefHeight="25.0" prefWidth="140.0" promptText="Введите ISBN"
-                   GridPane.columnIndex="1" GridPane.rowIndex="2">
+                   GridPane.columnIndex="1" GridPane.rowIndex="3">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
-        <Label text="Количество страниц" GridPane.rowIndex="3">
+        <Label text="Количество страниц" GridPane.rowIndex="4">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -69,12 +70,12 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="bookPages" prefHeight="25.0" prefWidth="140.0" promptText="Введите количество страниц"
-                   GridPane.columnIndex="1" GridPane.rowIndex="3">
+                   GridPane.columnIndex="1" GridPane.rowIndex="4">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </TextField>
-        <Label text="Интернет ссылка" GridPane.rowIndex="4">
+        <Label text="Интернет ссылка" GridPane.rowIndex="5">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -83,10 +84,16 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="bookLink" prefHeight="25.0" prefWidth="140.0" promptText="Вставьте ссылку"
-                   GridPane.columnIndex="1" GridPane.rowIndex="4">
+                   GridPane.columnIndex="1" GridPane.rowIndex="5">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
+        <Label alignment="CENTER" prefHeight="17.0" prefWidth="614.0" text="Заполните информацию о книге"
+               textAlignment="CENTER" GridPane.columnSpan="2">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
     </children>
 </GridPane>

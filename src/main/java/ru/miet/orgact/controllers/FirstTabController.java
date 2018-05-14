@@ -3,11 +3,18 @@ package ru.miet.orgact.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.textfield.TextFields;
+import org.controlsfx.validation.ValidationMessage;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
+import org.controlsfx.validation.decoration.StyleClassValidationDecoration;
+import org.controlsfx.validation.decoration.ValidationDecoration;
 import ru.miet.orgact.Client;
 import ru.miet.orgact.handlers.AddAuthorHandler;
 import ru.miet.orgact.handlers.StringListener;
@@ -61,13 +68,14 @@ public class FirstTabController {
 
     @FXML
     public void initialize() {
-/*
+
         ValidationSupport validationSupport = new ValidationSupport();
+
+        validationSupport.setValidationDecorator(new StyleClassValidationDecoration());
 
         validationSupport.setValidationDecorator(new ValidationDecoration() {
             Control control;
             Border border;
-            Color color;
 
             @Override
             public void removeDecorations(Control control) {
@@ -77,8 +85,6 @@ public class FirstTabController {
             @Override
             public void applyValidationDecoration(ValidationMessage validationMessage) {
                 Border temp = border;
-                temp.getStrokes().clear();
-                temp.getStrokes().add(new BorderStroke(Color.BLACK,BorderStrokeStyle.SOLID,CornerRadii.EMPTY,BorderWidths.DEFAULT));
                 control.borderProperty().setValue(temp);
             }
 
@@ -89,7 +95,6 @@ public class FirstTabController {
             }
         });
         validationSupport.registerValidator(nameField, false, Validator.createEmptyValidator("Необходимо ввести название"));
-*/
 
 
         yearField.textProperty().addListener(new YearFieldListener(yearField));

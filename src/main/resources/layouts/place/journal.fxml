@@ -4,13 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="282.0" prefWidth="412.0"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="333.0" prefWidth="413.0"
           xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ru.miet.orgact.controllers.JournalController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" prefWidth="188.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="221.0"/>
     </columnConstraints>
     <rowConstraints>
+        <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
@@ -20,7 +21,7 @@
         <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Label text="Название журнала">
+        <Label text="Название журнала" GridPane.rowIndex="1">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -29,12 +30,12 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="journalName" prefHeight="25.0" prefWidth="140.0" promptText="Введите название журнала"
-                   GridPane.columnIndex="1">
+                   GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
-        <Label text="Импакт-фактор журнала" GridPane.rowIndex="1">
+        <Label text="Импакт-фактор журнала" GridPane.rowIndex="2">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -43,12 +44,12 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="journalFactor" prefHeight="25.0" prefWidth="140.0" promptText="Введите импакт-фактор журнала"
-                   GridPane.columnIndex="1" GridPane.rowIndex="1">
+                   GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </TextField>
-        <Label text="Интернет ссылка" GridPane.rowIndex="3">
+        <Label text="Интернет ссылка" GridPane.rowIndex="4">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -57,12 +58,12 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="journalLink" prefHeight="25.0" prefWidth="140.0" promptText="Вставьте ссылку"
-                   GridPane.columnIndex="1" GridPane.rowIndex="3">
+                   GridPane.columnIndex="1" GridPane.rowIndex="4">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
-        <Label text="Страницы" GridPane.rowIndex="2">
+        <Label text="Страницы" GridPane.rowIndex="3">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -71,12 +72,12 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="journalPages" prefHeight="25.0" prefWidth="140.0" promptText="Введите страницы"
-                   GridPane.columnIndex="1" GridPane.rowIndex="2">
+                   GridPane.columnIndex="1" GridPane.rowIndex="3">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </TextField>
-        <Label text="ISSN" GridPane.rowIndex="4">
+        <Label text="ISSN" GridPane.rowIndex="5">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -85,21 +86,27 @@
             </GridPane.margin>
         </Label>
         <TextField fx:id="journalISSN" prefHeight="25.0" prefWidth="140.0" promptText="Ввведите ISSN"
-                   GridPane.columnIndex="1" GridPane.rowIndex="4">
+                   GridPane.columnIndex="1" GridPane.rowIndex="5">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </TextField>
-        <CheckBox fx:id="journalVak" mnemonicParsing="false" text="ВАК" GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <CheckBox fx:id="journalVak" mnemonicParsing="false" text="ВАК" GridPane.columnIndex="1" GridPane.rowIndex="6">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </CheckBox>
         <CheckBox fx:id="journalRussian" mnemonicParsing="false" text="Российский" GridPane.columnIndex="1"
-                  GridPane.rowIndex="6">
+                  GridPane.rowIndex="7">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </CheckBox>
+        <Label alignment="CENTER" prefHeight="17.0" prefWidth="614.0" text="Заполните информацию о журнале"
+               textAlignment="CENTER" GridPane.columnSpan="2">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
     </children>
 </GridPane>
