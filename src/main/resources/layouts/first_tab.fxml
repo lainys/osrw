@@ -27,7 +27,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <Label text="Название">
+                <Label text="Название" GridPane.rowIndex="1">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -36,12 +36,12 @@
                     </GridPane.margin>
                 </Label>
                 <TextField fx:id="nameField" prefHeight="25.0" prefWidth="140.0"
-                           promptText="Введите название публикации" GridPane.columnIndex="1">
+                           promptText="Введите название публикации" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label alignment="TOP_CENTER" text="Авторы" GridPane.rowIndex="1">
+                <Label alignment="TOP_CENTER" text="Авторы" GridPane.rowIndex="2">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -50,7 +50,7 @@
                     </GridPane.margin>
                 </Label>
                 <VBox fx:id="authorsFields" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="LEFT"
-                      GridPane.rowIndex="1">
+                      GridPane.rowIndex="2">
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                             <children>
@@ -77,7 +77,7 @@
                         <Cursor fx:constant="DEFAULT"/>
                     </cursor>
                 </VBox>
-                <Label text="Год" GridPane.rowIndex="2">
+                <Label text="Год" GridPane.rowIndex="3">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -86,12 +86,12 @@
                     </GridPane.margin>
                 </Label>
                 <TextField fx:id="yearField" prefWidth="451.0" promptText="Введите год" GridPane.columnIndex="1"
-                           GridPane.rowIndex="2">
+                           GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label text="Страна" GridPane.rowIndex="3">
+                <Label text="Страна" GridPane.rowIndex="4">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -100,12 +100,12 @@
                     </GridPane.margin>
                 </Label>
                 <TextField fx:id="countryField" promptText="Введите страну" GridPane.columnIndex="1"
-                           GridPane.rowIndex="3">
+                           GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label text="Город" GridPane.rowIndex="4">
+                <Label text="Город" GridPane.rowIndex="5">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -113,12 +113,12 @@
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </Label>
-                <TextField fx:id="cityField" promptText="Введите город" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <TextField fx:id="cityField" promptText="Введите город" GridPane.columnIndex="1" GridPane.rowIndex="5">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label text="Издательство" GridPane.rowIndex="5">
+                <Label text="Издательство" GridPane.rowIndex="6">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -127,12 +127,12 @@
                     </GridPane.margin>
                 </Label>
                 <TextField fx:id="publishingHouseField" promptText="Введите издательство" GridPane.columnIndex="1"
-                           GridPane.rowIndex="5">
+                           GridPane.rowIndex="6">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label text="Раздел" GridPane.rowIndex="6">
+                <Label text="Раздел" GridPane.rowIndex="7">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -141,12 +141,12 @@
                     </GridPane.margin>
                 </Label>
                 <ComboBox fx:id="topic" prefHeight="25.0" prefWidth="429.0" promptText="Выберите раздел"
-                          GridPane.columnIndex="1" GridPane.rowIndex="6">
+                          GridPane.columnIndex="1" GridPane.rowIndex="7">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </ComboBox>
-                <Label text="Направление" GridPane.rowIndex="7">
+                <Label text="Направление" GridPane.rowIndex="8">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -154,12 +154,19 @@
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </Label>
-                <CheckComboBox fx:id="directions" prefHeight="25.0" prefWidth="429.0"
-                               GridPane.columnIndex="1" GridPane.rowIndex="7">
+                <CheckComboBox fx:id="directions" prefHeight="25.0" prefWidth="429.0" GridPane.columnIndex="1"
+                               GridPane.rowIndex="8">
                     <GridPane.margin>
                         <Insets left="10.0" right="10.0"/>
                     </GridPane.margin>
                 </CheckComboBox>
+                <Label alignment="CENTER" prefHeight="17.0" prefWidth="653.0"
+                       text="Заполните основную информацию о публикации" textAlignment="CENTER" textOverrun="CLIP"
+                       GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
 
 
             </children>
