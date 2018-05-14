@@ -576,6 +576,6 @@ public class MainController {
             String answer = client.getMessage();
             showMessage(answer);
         }
-
     }
+
 }

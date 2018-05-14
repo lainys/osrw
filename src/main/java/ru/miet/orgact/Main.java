@@ -20,6 +20,10 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/layouts/main.fxml"));
         primaryStage.setTitle("Организация отчетности");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setMaximized(false);
+        primaryStage.setWidth(700);
+        primaryStage.setHeight(750);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }

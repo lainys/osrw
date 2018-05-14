@@ -57,7 +57,7 @@ public class Client {
 
             Journal journal = new Journal();
             journal.setCode(Integer.parseInt(parse_str.get(0)));
-            journal.setName(parse_str.get(1));
+            journal.setName(parse_str.get(1).substring(2, parse_str.get(1).length() - 1));
             journal.setIssn(parse_str.get(2));
             journal.setRussian(Boolean.parseBoolean(parse_str.get(3)));
             journal.setVak(Boolean.parseBoolean(parse_str.get(4)));
@@ -113,7 +113,7 @@ public class Client {
 
             Conference conference = new Conference();
             conference.setCode(Integer.parseInt(parse_str.get(0)));
-            conference.setName(parse_str.get(1));
+            conference.setName(parse_str.get(1).substring(2, parse_str.get(1).length() - 1));
             conference.setCountry(parse_str.get(2));
             conference.setCity(parse_str.get(3));
 
