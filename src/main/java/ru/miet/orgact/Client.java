@@ -18,6 +18,7 @@ public class Client {
 
     public Client() {
         ip = "127.0.0.1";
+        ip = "192.168.1.4";
         port = 9000;
     }
 

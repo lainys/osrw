@@ -18,6 +18,8 @@ public class FindJournalController {
     @FXML
     ListView listJournals;
 
+    ThirdTabController thirdTab;
+
 
     @FXML
     public void findJournal() {
@@ -39,14 +41,17 @@ public class FindJournalController {
 
     @FXML
     public void notFindJournal() {
-        //сделать чтобы открылось пустая форма с полями конференции
-
+        thirdTab.selectPlace("journal");
     }
 
     @FXML
     public void selectJournal() {
-        Journal conf = (Journal) listJournals.getSelectionModel().getSelectedItem();
-        //сделать чтобы открылось заполненная форма с полями конференции
+        Journal journal = (Journal) listJournals.getSelectionModel().getSelectedItem();
+        thirdTab.selectJournal(journal);
+    }
+
+    public void setThirdController(ThirdTabController contrl) {
+        thirdTab = contrl;
     }
 
 }

@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.BorderPane;
+import ru.miet.orgact.Conference;
+import ru.miet.orgact.Journal;
 
 import java.io.IOException;
 
@@ -33,11 +35,19 @@ public class ThirdTabController {
             Parent root;
             switch (name) {
                 case "conference": {
-                    root = FXMLLoader.load(getClass().getResource("/layouts/findConference.fxml"));
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/findConference.fxml"));
+                    root = loader.load();
+                    FindConferenceController controller = loader.getController();
+                    controller.setThirdController(this);
                     break;
                 }
                 case "journal": {
-                    root = FXMLLoader.load(getClass().getResource("/layouts/findJournal.fxml"));
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/findJournal.fxml"));
+                    root = loader.load();
+                    FindJournalController controller = loader.getController();
+                    controller.setThirdController(this);
                     break;
                 }
 
@@ -52,4 +62,39 @@ public class ThirdTabController {
         }
     }
 
+    public void selectPlace(String place) {
+        try {
+            Node source = FXMLLoader.load(getClass().getResource("/layouts/place/" + place + ".fxml"));
+
+            placePanel.setCenter(source);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void selectConference(Conference conf) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/place/conference.fxml"));
+            Parent source = loader.load();
+            ConferenceController controller = loader.getController();
+            controller.setConference(conf);
+            placePanel.setCenter(source);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void selectJournal(Journal journal) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/place/journal.fxml"));
+            Parent source = loader.load();
+            JournalController controller = loader.getController();
+            controller.setJournal(journal);
+            placePanel.setCenter(source);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+

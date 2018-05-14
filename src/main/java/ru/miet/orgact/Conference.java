@@ -1,12 +1,10 @@
 package ru.miet.orgact;
 
-import java.util.Calendar;
-
 public class Conference {
     private int code;
     private String name;
-    private Calendar start;
-    private Calendar finish;
+    private String start;
+    private String finish;
     private String country;
     private String city;
 
@@ -38,20 +36,20 @@ public class Conference {
         this.name = name;
     }
 
-    public Calendar getStart() {
+    public String getStart() {
         return start;
     }
 
     public void setStart(String start) {
-        this.start = Calendar.getInstance();
+        this.start = start;
     }
 
-    public Calendar getFinish() {
+    public String getFinish() {
         return finish;
     }
 
     public void setFinish(String finish) {
-        this.finish = Calendar.getInstance();
+        this.finish = finish;
     }
 
     public String getCountry() {

@@ -18,6 +18,8 @@ public class FindConferenceController {
     @FXML
     ListView listConference;
 
+    ThirdTabController thirdTab;
+
     @FXML
     public void findConference() {
         String name = finderName.getText();
@@ -38,13 +40,17 @@ public class FindConferenceController {
 
     @FXML
     public void notFindConference() {
-        //сделать чтобы открылось пустая форма с полями конференции
+        thirdTab.selectPlace("conference");
 
     }
 
     @FXML
     public void selectConference() {
         Conference conf = (Conference) listConference.getSelectionModel().getSelectedItem();
-        //сделать чтобы открылось заполненная форма с полями конференции
+        thirdTab.selectConference(conf);
+    }
+
+    public void setThirdController(ThirdTabController contrl) {
+        thirdTab = contrl;
     }
 }
