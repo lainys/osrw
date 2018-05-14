@@ -9,19 +9,24 @@
     <top>
         <MenuBar depthTest="DISABLE" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Файл">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close"/>
+                        <MenuItem mnemonicParsing="false" text="Сохранить публикацию"/>
+                        <MenuItem mnemonicParsing="false" text="Открыть публикацию из файла"/>
+                        <MenuItem mnemonicParsing="false" text="Очистить поля"/>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Правка">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete"/>
+                        <MenuItem mnemonicParsing="false" text="Изменить публикацию"/>
+                        <MenuItem mnemonicParsing="false" text="Изменить журнал"/>
+                        <MenuItem mnemonicParsing="false" text="Изменить конференцию"/>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu mnemonicParsing="false" text="Помощь">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About"/>
+                        <MenuItem mnemonicParsing="false" text="О программе"/>
+                        <MenuItem mnemonicParsing="false" text="Скачать руководство оператора"/>
                     </items>
                 </Menu>
             </menus>
@@ -30,13 +35,13 @@
     <center>
         <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
-                <Tab onSelectionChanged="#changeSelection" text="Информация о публикации">
+                <Tab onSelectionChanged="#changeSelection" text="    Информация о публикации    ">
                     <fx:include fx:id="firstTabPage" source="first_tab.fxml"/>
                 </Tab>
-                <Tab onSelectionChanged="#changeSelection" text="Цитирование">
+                <Tab onSelectionChanged="#changeSelection" text="    Цитирование    ">
                     <fx:include fx:id="secondTabPage" source="second_tab.fxml"/>
                 </Tab>
-                <Tab onSelectionChanged="#changeSelection" text="Источник публикации">
+                <Tab onSelectionChanged="#changeSelection" text="    Источник публикации    ">
                     <fx:include fx:id="thirdTabPage" source="third_tab.fxml"/>
                 </Tab>
             </tabs>
