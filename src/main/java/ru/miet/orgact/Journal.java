@@ -2,6 +2,15 @@ package ru.miet.orgact;
 
 public class Journal {
     private int code;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
     private String name;
     private String issn;
     private boolean russian;
@@ -19,33 +28,13 @@ public class Journal {
 
     }
 
-    public Journal(int code, String name, String issn, boolean russian, boolean vak, boolean recenz, boolean isi, boolean scopus, boolean rinc, double impact_factor, boolean impact_factor_JSR, String link) {
-        this.code = code;
-        this.name = name;
-        this.issn = issn;
-        this.russian = russian;
-        this.vak = vak;
-        this.recenz = recenz;
-        this.isi = isi;
-        this.scopus = scopus;
-        this.rinc = rinc;
-        this.impact_factor = impact_factor;
-        this.impact_factor_JSR = impact_factor_JSR;
-        this.link = link;
-    }
 
     public String toString() {
         String result = name;
         return result;
     }
 
-    public int getCode() {
-        return code;
-    }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public String getName() {
         return name;

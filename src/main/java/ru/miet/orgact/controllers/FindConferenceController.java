@@ -40,7 +40,7 @@ public class FindConferenceController {
 
     @FXML
     public void notFindConference() {
-        thirdTab.selectPlace("conference");
+        thirdTab.toNotSearch("conference");
 
     }
 

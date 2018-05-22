@@ -10,6 +10,9 @@ import ru.miet.orgact.handlers.NumberListener;
 
 public class JournalController {
 
+
+    ThirdTabController thirdTabController;
+
     @FXML
     private TextField journalName;
     @FXML
@@ -21,6 +24,8 @@ public class JournalController {
     @FXML
     private TextField journalISSN;
 
+    @FXML
+    private TextField journalLink;
     @FXML
     private CheckBox journalVak;
 
@@ -38,11 +43,26 @@ public class JournalController {
 
 
     public void setJournal(Journal journal) {
+        journalName.clear();
         journalName.setText(journal.getName());
+        journalFactor.clear();
         journalFactor.setText(Double.toString(journal.getImpact_factor()));
+        journalPages.clear();
         journalPages.setText("0");
+        journalLink.clear();
+        journalLink.setText(journal.getLink());
+        journalISSN.clear();
         journalISSN.setText(journal.getIssn());
+
         journalVak.setSelected(journal.isVak());
         journalRussian.setSelected(journal.isRussian());
+    }
+
+    public void toSearch() {
+        thirdTabController.toSearch("journal");
+    }
+
+    public void setController(ThirdTabController contr) {
+        thirdTabController = contr;
     }
 }

@@ -6,6 +6,7 @@ import java.util.*;
 
 public class Article {
 
+    private int code;
     private ArrayList<String> authors;
     private ArrayList<String> positions;
     private String name;
@@ -18,6 +19,7 @@ public class Article {
     private String topic;
     private ArrayList<Integer> directions;
     private String typeJson;
+    private String link;
 
     public Article(String name, ArrayList<String> authors, ArrayList<String> positions, Integer year, String type, String country, String city, String publishingHouse, HashMap<String, Integer> citations, String topic, ArrayList<Integer> directions) {
         this.name = name;
@@ -32,9 +34,11 @@ public class Article {
         this.topic = topic;
         this.directions = directions;
         this.typeJson = "";
+        this.link = "";
     }
 
     public Article() {
+        code = -1;
         name = "";
         authors = new ArrayList<>();
         positions = new ArrayList<>();
@@ -55,11 +59,27 @@ public class Article {
 
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
     public String toJSON() {
         String result = "{";
         result += "\"name\":\"" + name + "\",";
 
-        if (authors != null) {
+        /*if (authors != null) {
             result += "\"authors\":{";
             for (int i = 0; i < authors.size(); i++) {
 
@@ -73,13 +93,36 @@ public class Article {
             result += "},";
         } else {
             result += "\"authors\":\"null\",";
+        }*/
+
+        if (authors != null) {
+            result += "\"authors\":[";
+            for (int i = 0; i < authors.size(); i++) {
+                result += "\"" + authors.get(i) + "\",";
+            }
+            result += "],";
+        } else {
+            result += "\"authors\":\"null\",";
         }
 
-        result += "\"year\":" + year + ",";
+        if (positions != null) {
+            result += "\"positions\":[";
+            for (int i = 0; i < positions.size(); i++) {
+                result += "\"" + positions.get(i) + "\",";
+            }
+            result += "],";
+        } else {
+            result += "\"positions\":\"null\",";
+        }
+
+
+        result += "\"year\":\"" + year + "\",";
 
         result += "\"type\":\"" + type + "\",";
 
-        result += typeJson + "\",";
+        result += "\"typeJson\":\"" + typeJson + "\",";
+
+        //result += typeJson + ",";
 
         result += "\"country\":\"" + country + "\",";
 
@@ -104,11 +147,11 @@ public class Article {
         result += "\"topic\":\"" + topic + "\",";
 
         if (directions != null) {
-            result += "\"directions\":{";
+            result += "\"directions\":[";
             for (int i = 0; i < directions.size(); i++) {
-                result += "\"" + i + "\":\"" + directions.get(i) + "\",";
+                result += "\"" + directions.get(i) + "\",";
             }
-            result += "}";
+            result += "]";
         } else {
             result += "\"directions\":\"null\",";
         }
@@ -117,6 +160,10 @@ public class Article {
         result += "}";
 
         return result;
+    }
+
+    public ArrayList<String> getAuthors() {
+        return authors;
     }
 
     public void setName(String name) {
@@ -155,15 +202,39 @@ public class Article {
         citations.putAll(map);
     }
 
-    public void setTypeJson(String type) {
-        typeJson = type;
+    public ArrayList<String> getPositions() {
+        return positions;
     }
 
-    public void setDirections(ObservableList<Integer> temp, int max) {
+    public String getType() {
+        return type;
+    }
+
+    public String getPublishingHouse() {
+        return publishingHouse;
+    }
+
+    public HashMap<String, Integer> getCitations() {
+        return citations;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public ArrayList<Integer> getDirections() {
+        return directions;
+    }
+
+    public void setDirections(ObservableList<Integer> temp) {
         ArrayList<Integer> list = new ArrayList<>();
         list.addAll(temp);
         directions.clear();
-        for (int i = 0; i < max; i++) {
+        for (int i = 0; i < 5; i++) {
             if (list.contains(i)) {
                 list.remove((Integer) i);
                 directions.add(1);
@@ -173,9 +244,32 @@ public class Article {
         }
     }
 
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public String getTypeJson() {
+        return typeJson;
     }
 
+    public void setTypeJson(String type) {
+        typeJson = type;
+    }
 
+    public String getCity() {
+
+        return city;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public String getCountry() {
+        return country;
+    }
 }

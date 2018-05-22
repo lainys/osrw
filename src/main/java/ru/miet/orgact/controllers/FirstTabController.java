@@ -3,20 +3,14 @@ package ru.miet.orgact.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
 import org.controlsfx.control.textfield.TextFields;
-import org.controlsfx.validation.ValidationMessage;
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
-import org.controlsfx.validation.decoration.StyleClassValidationDecoration;
-import org.controlsfx.validation.decoration.ValidationDecoration;
 import ru.miet.orgact.Client;
 import ru.miet.orgact.handlers.AddAuthorHandler;
+import ru.miet.orgact.handlers.DeleteAuthorHandler;
 import ru.miet.orgact.handlers.StringListener;
 import ru.miet.orgact.handlers.YearFieldListener;
 
@@ -54,6 +48,9 @@ public class FirstTabController {
     private Button addAuthor;
 
     @FXML
+    private Button deleteAuthor;
+
+    @FXML
     private GridPane grid;
 
     @FXML
@@ -69,7 +66,7 @@ public class FirstTabController {
     @FXML
     public void initialize() {
 
-        ValidationSupport validationSupport = new ValidationSupport();
+/*        ValidationSupport validationSupport = new ValidationSupport();
 
         validationSupport.setValidationDecorator(new StyleClassValidationDecoration());
 
@@ -94,7 +91,7 @@ public class FirstTabController {
                 border = control.getBorder();
             }
         });
-        validationSupport.registerValidator(nameField, false, Validator.createEmptyValidator("Необходимо ввести название"));
+        validationSupport.registerValidator(nameField, false, Validator.createEmptyValidator("Необходимо ввести название"));*/
 
 
         yearField.textProperty().addListener(new YearFieldListener(yearField));
@@ -103,7 +100,11 @@ public class FirstTabController {
 
         ArrayList<String> employees = Client.getEmployees();
         TextFields.bindAutoCompletion(authorField, employees);
+
+        deleteAuthor.setOnAction(new DeleteAuthorHandler(authorsFields, grid));
+
         addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid, employees));
+        authorsFields.setSpacing(20);
 
         position.getItems().addAll("Студент МИЭТ", "Аспирант МИЭТ", "Сотрудник МИЭТ", "Другое");
         topic.getItems().addAll("Монографии", "Учебники и учебные пособия", "Учебно-методические пособия", "Статьи в зарубежных журналах", "Статьи в российских журналах", "Материалы докладов зарубежных научно-технических конференций", "Материалы докладов научно-технических конференций в России и СНГ", "Статьи в сборниках научных трудов", "Тезисы докладов");

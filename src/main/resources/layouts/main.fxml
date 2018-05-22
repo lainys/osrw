@@ -4,29 +4,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121"
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" xmlns="http://javafx.com/javafx/8.0.121"
             fx:controller="ru.miet.orgact.controllers.MainController">
     <top>
         <MenuBar depthTest="DISABLE" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="Файл">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Сохранить публикацию"/>
-                        <MenuItem mnemonicParsing="false" text="Открыть публикацию из файла"/>
-                        <MenuItem mnemonicParsing="false" text="Очистить поля"/>
+                        <MenuItem mnemonicParsing="false" onAction="#menuSaveArticle" text="Сохранить публикацию"/>
+                        <MenuItem mnemonicParsing="false" onAction="#menuOpenArticle"
+                                  text="Открыть публикацию из файла"/>
+                        <MenuItem mnemonicParsing="false" onAction="#menuCleanArticle" text="Очистить поля"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Правка">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Изменить публикацию"/>
-                        <MenuItem mnemonicParsing="false" text="Изменить журнал"/>
-                        <MenuItem mnemonicParsing="false" text="Изменить конференцию"/>
+                        <MenuItem mnemonicParsing="false" onAction="#menuEditArticle" text="Редактировать публикацию"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Помощь">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="О программе"/>
-                        <MenuItem mnemonicParsing="false" text="Скачать руководство оператора"/>
+                        <MenuItem mnemonicParsing="false" onAction="#menuAbout" text="О программе"/>
+                        <MenuItem mnemonicParsing="false" onAction="#menuHelp" text="Скачать руководство оператора"/>
                     </items>
                 </Menu>
             </menus>

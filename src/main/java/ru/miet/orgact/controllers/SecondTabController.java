@@ -34,7 +34,7 @@ public class SecondTabController {
     public void initTextField() {
         ObservableList<Node> list = grid.getChildren();
 
-        for (int i = 0; i < list.size() - 2; i += 2) {
+        for (int i = 1; i < list.size() - 1; i += 2) {
             TextField text = (TextField) list.get(i + 1);
             text.textProperty().addListener(new NumberListener(text));
         }

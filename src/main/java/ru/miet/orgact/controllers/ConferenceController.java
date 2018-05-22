@@ -11,6 +11,8 @@ import java.time.LocalDate;
 
 public class ConferenceController {
 
+    ThirdTabController thirdTabController;
+
     @FXML
     private TextField conferenceName;
 
@@ -42,10 +44,15 @@ public class ConferenceController {
     }
 
     public void setConference(Conference conf) {
+        conferenceName.clear();
         conferenceName.setText(conf.getName());
+        conferenceCountry.clear();
         conferenceCountry.setText(conf.getCountry());
+        conferenceCity.clear();
         conferenceCity.setText(conf.getCity());
+        conferencePages.clear();
         conferencePages.setText("0");
+        conferenceLink.clear();
         conferenceLink.setText("");
         System.out.println(conf.getStart());
         String[] date = conf.getStart().split(". ");
@@ -59,6 +66,14 @@ public class ConferenceController {
         day = Integer.parseInt(date[2]);
         conferenceFinish.setValue(LocalDate.of(year, month, day));
 
+    }
+
+    public void toSearch() {
+        thirdTabController.toSearch("conference");
+    }
+
+    public void setController(ThirdTabController contr) {
+        thirdTabController = contr;
     }
 
 }

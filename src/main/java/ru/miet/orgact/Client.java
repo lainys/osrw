@@ -1,13 +1,19 @@
 package ru.miet.orgact;
 
+import com.google.gson.Gson;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Client {
 
-    String ip;
-    int port;
+
+    private static String ip;
+    private static int port;
     private Socket socket;
     private BufferedReader inMessage;
     private PrintWriter outMessage;
@@ -17,20 +23,21 @@ public class Client {
     }*/
 
     public Client() {
-        ip = "127.0.0.1";
-        ip = "192.168.1.4";
-        port = 9000;
+        Client.ip = "127.0.0.1";
+        //Client.ip = "192.168.1.4";
+        Client.port = 9000;
     }
 
     public Client(String ip, int port) {
-        this.ip = ip;
-        this.port = port;
+        Client.ip = ip;
+        Client.port = port;
         connect();
     }
 
     public static void main(String[] args) {
-        System.out.println(getConferences());
+        System.out.println(getArticles());
     }
+
 
     public static ArrayList<Journal> getJournals() {
         Client client = new Client();
@@ -77,6 +84,218 @@ public class Client {
         }
 
         return journals;
+    }
+
+    public static ArrayList<Article> getArticles() {
+
+        ArrayList<String> topics = getTopics();
+        ArrayList<Conference> conferences = getConferences();
+        ArrayList<Journal> journals = getJournals();
+        ArrayList<String> ep = getEP();
+        Client client = new Client();
+        client.sendMessage("{\'type\':\'get_info\',\'data\':{\'name\':\'СписокПубликаций\', \"fields\": [\"*\"]}}");
+
+        String message = client.getMessage();
+
+        String[] result = message.split("\\),|\\)]");
+
+        ArrayList<Article> articles = new ArrayList<>();
+        for (int i = 0; i < result.length - 1; i += 1) {
+            String[] journal_str = result[i].substring(2, result[i].length()).split(",");
+
+            ArrayList<String> p = new ArrayList<>();
+            for (int j = 0; j < journal_str.length; j++) {
+                p.add(journal_str[j].trim());
+            }
+
+            for (int j = 0; j < p.size(); j++) {
+                if (p.get(j).startsWith("'")) {
+                    while (!p.get(j).endsWith("'")) {
+                        p.add(j, p.get(j) + " , " + p.get(j + 1));
+                        p.remove(j + 1);
+                        p.remove(j + 1);
+                    }
+                }
+            }
+
+            Article article = new Article();
+            // 0 - code
+            article.setCode(Integer.parseInt(p.get(0)));
+            // 1 - check
+            // 2 - authors
+            ArrayList<String> authors = new ArrayList<>();
+            ArrayList<String> positions = new ArrayList<>();
+            String[] parse_authors = p.get(2).substring(1, p.get(2).length() - 1).split(",");
+            for (int j = 0; j < parse_authors.length; j++) {
+                authors.add(parse_authors[j].trim());
+                for (int k = 0; k < ep.size(); k += 2) {
+                    if (ep.get(k).startsWith(parse_authors[j].trim())) {
+                        positions.add(ep.get(k + 1) + " МИЭТ");
+                        break;
+                    }
+                }
+                if (authors.size() != positions.size()) {
+                    positions.add("Другое");
+                }
+            }
+            article.setAuthors(authors);
+            article.setPositions(positions);
+
+            // 3 - topic
+            if (p.get(3).compareTo("None") != 0) {
+                article.setTopic(topics.get(Integer.parseInt(p.get(3)) - 1));
+            }
+
+            // 4 - name
+            article.setName(p.get(4).substring(1, p.get(4).length() - 1));
+
+            //journal
+            // 5 - id_journal
+            if (p.get(5).compareTo("None") != 0) {
+
+                article.setType("journal");
+
+                for (int k = 0; k < journals.size(); k++) {
+                    if (journals.get(k).getCode() == Integer.parseInt(p.get(5))) {
+                        Gson gson = new Gson();
+                        article.setTypeJson(gson.toJson(journals.get(k)));
+                        break;
+                    }
+                }
+            }
+            // 6 - number of journal
+
+            //conference
+            // 7 - id_conference
+            if (p.get(7).compareTo("None") != 0) {
+
+                article.setType("conference");
+
+                for (int k = 0; k < conferences.size(); k++) {
+                    if (conferences.get(k).getCode() == Integer.parseInt(p.get(7))) {
+                        Gson gson = new Gson();
+                        article.setTypeJson(gson.toJson(conferences.get(k)));
+                        break;
+                    }
+                }
+            }
+            // 8 - link
+            article.setLink(p.get(8).substring(1, p.get(8).length() - 1));
+            // 9 - country
+            article.setCountry(p.get(9).substring(1, p.get(9).length() - 1));
+            // 10 - city
+            article.setCity(p.get(10).substring(1, p.get(10).length() - 1));
+            // 11 - publishing house
+            article.setPublishingHouse(p.get(11).substring(1, p.get(11).length() - 1));
+            // 12 - year
+            article.setYear(Integer.parseInt(p.get(12)));
+            // 13 - tom
+
+            // 14 - pages
+
+            // 15 - isbn/issn
+
+            // 16 - doi
+
+            if (article.getTypeJson().length() == 0) {
+                Book book = new Book();
+                book.setName(article.getName());
+                book.setLink(article.getLink());
+                book.setPages(p.get(14).substring(1, p.get(14).length() - 1));
+                book.setISBN(p.get(12));
+                book.setPublishingHouse(article.getPublishingHouse());
+
+                Gson gson = new Gson();
+                article.setType("book");
+                article.setTypeJson(gson.toJson(book));
+            }
+
+            // 17 - eith
+            // 18 - tit
+            // 19 - mnioz
+            // 20 - sn
+            // 21 - gn
+            ObservableList<Integer> list = FXCollections.observableArrayList();
+            if (Boolean.parseBoolean(p.get(17).toLowerCase())) {
+                list.add(0);
+            }
+            if (Boolean.parseBoolean(p.get(18).toLowerCase())) {
+                list.add(1);
+            }
+            if (Boolean.parseBoolean(p.get(19).toLowerCase())) {
+                list.add(2);
+            }
+            if (Boolean.parseBoolean(p.get(20).toLowerCase())) {
+                list.add(3);
+            }
+            if (Boolean.parseBoolean(p.get(21).toLowerCase())) {
+                list.add(4);
+            }
+            article.setDirections(list);
+            // 22 - wos
+            // 23 - cit wos
+            HashMap<String, Integer> map = new HashMap<>();
+            if (Boolean.parseBoolean(p.get(22).toLowerCase())) {
+                int countcit = Integer.parseInt(p.get(23));
+                map.put("WOS", countcit);
+            }
+
+            // 24 - scopus
+            // 25 - cit scopus
+            if (Boolean.parseBoolean(p.get(24).toLowerCase())) {
+                int countcit = Integer.parseInt(p.get(25));
+                map.put("Scopus", countcit);
+            }
+
+            // 26 - rinz
+            // 27 - cit rinz
+            if (Boolean.parseBoolean(p.get(26).toLowerCase())) {
+                int countcit = Integer.parseInt(p.get(27));
+                map.put("РИНЦ", countcit);
+            }
+            // 28 - nuclear rinz
+            // 29 - cit nrinz
+            if (Boolean.parseBoolean(p.get(28).toLowerCase())) {
+                int countcit = Integer.parseInt(p.get(29));
+                map.put("ЯдроРИНЦ", countcit);
+            }
+
+            // 30 - google scholar
+            // 31 - cit google
+
+            if (Boolean.parseBoolean(p.get(30).toLowerCase())) {
+                int countcit = Integer.parseInt(p.get(31));
+                map.put("GoogleScholar", countcit);
+            }
+            // 32 - dimensions
+            // 33 - cit dimensions
+            if (Boolean.parseBoolean(p.get(32).toLowerCase())) {
+                int countcit = Integer.parseInt(p.get(33));
+                map.put("Dimensions", countcit);
+            }
+            // 34 - microsoft academic
+            // 35 - cit microsoft academic
+            if (Boolean.parseBoolean(p.get(34).toLowerCase())) {
+                int countcit = Integer.parseInt(p.get(35));
+                map.put("MicrosoftAcademic", countcit);
+            }
+            // 36 - erih_plus
+            // 37 - cit erih_plus
+            if (Boolean.parseBoolean(p.get(36).toLowerCase())) {
+                int countcit = Integer.parseInt(p.get(37));
+                map.put("ERIH_PLUS", countcit);
+            }
+            article.setCitations(map);
+            // 38 - ieee_proceedings
+            // 39 - ieee_proceedings_ c zarybej
+            // 40 - ieee_proceedings c institutami ran
+            // 41 - ieee proceedings s drugimi institutame
+
+            articles.add(article);
+
+        }
+
+        return articles;
     }
 
     public static ArrayList<Conference> getConferences() {
@@ -135,14 +354,6 @@ public class Client {
         return conferences;
     }
 
-    public static String parseAnswerFromGet(String answer) {
-        String pattern = "(\'(.*)\')";
-        if (answer.matches(pattern)) {
-            System.out.println(answer.matches(pattern));
-        }
-        return "";
-    }
-
     public static ArrayList<String> getEmployees() {
         Client client = new Client();
         client.sendMessage("{\'type\':\'get_info\',\'data\':{\'name\':\'Сотрудники\', \"fields\": [\"ФИО_сотрудника\"]}}");
@@ -158,15 +369,40 @@ public class Client {
         return employees;
     }
 
-    public static String getTopics() {
+
+    public static ArrayList<String> getEP() {
         Client client = new Client();
-        client.sendMessage("{\'type\':\'get_info\',\'data\':{\'name\':\'Разделы\', \"fields\": [\"Наименование_раздела\"]}}");
-        return client.getMessage();
+        client.sendMessage("{\'type\':\'get_info\',\'data\':{\'name\':\'Сотрудники\', \"fields\": [\"ФИО_сотрудника,Должность\"]}}");
+        String message = client.getMessage();
+
+        String[] result = message.split("\\[\\('|'");
+
+        ArrayList<String> employees = new ArrayList<>();
+        for (int i = 0; i < result.length - 1; i += 2) {
+            employees.add(result[i + 1]);
+        }
+
+        return employees;
+    }
+
+    public static ArrayList<String> getTopics() {
+        Client client = new Client();
+        client.sendMessage("{\'type\':\'get_info\',\'data\':{\'name\':\'Разделы\', \"fields\": [\"Номер_раздела,Наименование_раздела\"]}}");
+        String message = client.getMessage();
+
+        String[] result = message.split("\\[\\('|'");
+
+        ArrayList<String> employees = new ArrayList<>();
+        for (int i = 0; i < result.length - 1; i += 2) {
+            employees.add(result[i + 1]);
+        }
+
+        return employees;
     }
 
     private void connect() {
         try {
-            socket = new Socket(ip, port);
+            socket = new Socket(Client.ip, Client.port);
             inMessage = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             outMessage = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) {
@@ -190,10 +426,6 @@ public class Client {
             e.printStackTrace();
             return "Не удалось получить ответ от сервера!";
         }
-
-    }
-
-    public void sendArticle(Article article) {
 
     }
 

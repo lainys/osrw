@@ -41,7 +41,8 @@ public class FindJournalController {
 
     @FXML
     public void notFindJournal() {
-        thirdTab.selectPlace("journal");
+
+        thirdTab.toNotSearch("journal");
     }
 
     @FXML

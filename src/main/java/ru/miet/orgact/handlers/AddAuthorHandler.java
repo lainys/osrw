@@ -37,24 +37,22 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        Button source = (Button) event.getSource();
-        source.setText("-");
-        source.setOnAction(new DeleteAuthorHandler(authorsFields, grid));
         button_add();
+
     }
 
     public void button_add() {
         int len = authorsFields.getChildren().size();
-
-        authorsFields.getChildren().add(len, getNextAuthorBox());
-
-        resize_grid(30);
+        if (len <= 11) {
+            authorsFields.getChildren().add(len, getNextAuthorBox());
+            resize_grid(45);
+        }
     }
 
 
     public void resize_grid(int k) {
         for (int i = 0; i < grid.getRowConstraints().size(); i++) {
-            if (i == 1) {
+            if (i == 2) {
                 grid.getRowConstraints().get(i).setPrefHeight(grid.getRowConstraints().get(i).getPrefHeight() + k);
             }
         }
@@ -79,10 +77,10 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
         positionBox.setPromptText("Выберите должность");
         positionBox.setPrefSize(170, 25);
 
-        Button addAuthor = new Button("+");
+        Button addAuthor = new Button("-");
         addAuthor.setPrefSize(80, 25);
         addAuthor.setFont(buttonFont);
-        addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid, list));
+        addAuthor.setOnAction(new DeleteAuthorHandler(authorsFields, grid));
 
         nextAuthor.getChildren().addAll(textAuthor, positionBox, addAuthor);//, deleteAuthor);
         return nextAuthor;
