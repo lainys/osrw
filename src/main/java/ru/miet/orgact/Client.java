@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,7 +36,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        System.out.println(getArticles());
+        System.out.println(getJournals());
     }
 
 
@@ -66,20 +67,31 @@ public class Client {
             Journal journal = new Journal();
             journal.setCode(Integer.parseInt(parse_str.get(0)));
             journal.setName(parse_str.get(1).substring(2, parse_str.get(1).length() - 1));
-            journal.setIssn(parse_str.get(2));
-            journal.setRussian(Boolean.parseBoolean(parse_str.get(3)));
-            journal.setVak(Boolean.parseBoolean(parse_str.get(4)));
-            journal.setRecenz(Boolean.parseBoolean(parse_str.get(5)));
-            journal.setIsi(Boolean.parseBoolean(parse_str.get(6)));
-            journal.setScopus(Boolean.parseBoolean(parse_str.get(7)));
-            journal.setRinc(Boolean.parseBoolean(parse_str.get(8)));
+            if (parse_str.get(2).compareTo(" None") != 0) {
+
+                journal.setIssn(parse_str.get(2).substring(2, parse_str.get(2).length() - 1));
+            } else {
+
+                journal.setIssn("");
+            }
+            journal.setRussian(Boolean.parseBoolean(parse_str.get(3).substring(1, parse_str.get(3).length())));
+            journal.setVak(Boolean.parseBoolean(parse_str.get(4).substring(1, parse_str.get(4).length())));
+            journal.setRecenz(Boolean.parseBoolean(parse_str.get(5).substring(1, parse_str.get(5).length())));
+            journal.setIsi(Boolean.parseBoolean(parse_str.get(6).substring(1, parse_str.get(6).length())));
+            journal.setScopus(Boolean.parseBoolean(parse_str.get(7).substring(1, parse_str.get(7).length())));
+            journal.setRinc(Boolean.parseBoolean(parse_str.get(8).substring(1, parse_str.get(8).length())));
             if (parse_str.get(9).equals(" None")) {
                 journal.setImpact_factor(0);
             } else {
                 journal.setImpact_factor(Double.parseDouble(parse_str.get(9)));
             }
-            journal.setImpact_factor_JSR(Boolean.parseBoolean(parse_str.get(10)));
-            journal.setLink(parse_str.get(11));
+            journal.setImpact_factor_JSR(Boolean.parseBoolean(parse_str.get(10).substring(1, parse_str.get(10).length())));
+            if (parse_str.get(11).compareTo(" None") != 0) {
+
+                journal.setLink(parse_str.get(11).substring(2, parse_str.get(11).length() - 1));
+            } else {
+                journal.setLink("");
+            }
             journals.add(journal);
         }
 
@@ -100,7 +112,7 @@ public class Client {
         String[] result = message.split("\\),|\\)]");
 
         ArrayList<Article> articles = new ArrayList<>();
-        for (int i = 0; i < result.length - 1; i += 1) {
+        for (int i = 0; i < result.length; i += 1) {
             String[] journal_str = result[i].substring(2, result[i].length()).split(",");
 
             ArrayList<String> p = new ArrayList<>();
@@ -198,16 +210,26 @@ public class Client {
             // 16 - doi
 
             if (article.getTypeJson().length() == 0) {
-                Book book = new Book();
-                book.setName(article.getName());
-                book.setLink(article.getLink());
-                book.setPages(p.get(14).substring(1, p.get(14).length() - 1));
-                book.setISBN(p.get(12));
-                book.setPublishingHouse(article.getPublishingHouse());
+                if (p.get(11).compareTo("None") != 0) {
+                    Book book = new Book();
+                    book.setName(article.getName());
+                    book.setLink(article.getLink());
+                    book.setPages(p.get(14).substring(1, p.get(14).length() - 1));
+                    book.setISBN(p.get(12));
+                    book.setPublishingHouse(article.getPublishingHouse());
 
-                Gson gson = new Gson();
-                article.setType("book");
-                article.setTypeJson(gson.toJson(book));
+                    Gson gson = new Gson();
+                    article.setType("book");
+                    article.setTypeJson(gson.toJson(book));
+                } else {
+                    Other other = new Other();
+                    other.setLink(article.getLink());
+                    other.setName(article.getName());
+
+                    Gson gson = new Gson();
+                    article.setType("other");
+                    article.setTypeJson(gson.toJson(other));
+                }
             }
 
             // 17 - eith
@@ -282,8 +304,13 @@ public class Client {
             // 36 - erih_plus
             // 37 - cit erih_plus
             if (Boolean.parseBoolean(p.get(36).toLowerCase())) {
-                int countcit = Integer.parseInt(p.get(37));
-                map.put("ERIH_PLUS", countcit);
+                if (p.get(37).startsWith("'")) {
+                    int countcit = Integer.parseInt(p.get(37).substring(1, p.get(37).length() - 1));
+                    map.put("ERIH_PLUS", countcit);
+                } else {
+                    int countcit = Integer.parseInt(p.get(37));
+                    map.put("ERIH_PLUS", countcit);
+                }
             }
             article.setCitations(map);
             // 38 - ieee_proceedings
@@ -334,8 +361,8 @@ public class Client {
             Conference conference = new Conference();
             conference.setCode(Integer.parseInt(parse_str.get(0)));
             conference.setName(parse_str.get(1).substring(2, parse_str.get(1).length() - 1));
-            conference.setCountry(parse_str.get(2));
-            conference.setCity(parse_str.get(3));
+            conference.setCountry(parse_str.get(2).substring(2, parse_str.get(2).length() - 1));
+            conference.setCity(parse_str.get(3).substring(2, parse_str.get(3).length() - 1));
 
             //city country
             for (int j = 1; j < starts.length; j += 3) {
@@ -404,7 +431,7 @@ public class Client {
         try {
             socket = new Socket(Client.ip, Client.port);
             inMessage = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            outMessage = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+            outMessage = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -421,7 +448,8 @@ public class Client {
         try {
             System.out.println("Приём сообщения ");
             //System.out.println("Принято сообщение " + inMessage.readLine());
-            return inMessage.readLine();
+            String answer = inMessage.readLine();
+            return answer.substring(0, answer.length() - 1);
         } catch (IOException e) {
             e.printStackTrace();
             return "Не удалось получить ответ от сервера!";

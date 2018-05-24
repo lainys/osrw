@@ -77,6 +77,8 @@ public class Article {
 
     public String toJSON() {
         String result = "{";
+
+        result += "\"code\":\"" + code + "\",";
         result += "\"name\":\"" + name + "\",";
 
         /*if (authors != null) {
@@ -120,7 +122,7 @@ public class Article {
 
         result += "\"type\":\"" + type + "\",";
 
-        result += "\"typeJson\":\"" + typeJson + "\",";
+        result += "\"typeJson\":" + typeJson + ",";
 
         //result += typeJson + ",";
 
@@ -136,7 +138,7 @@ public class Article {
             while (set.hasNext()) {
                 Map.Entry<String, Integer> next = set.next();
 
-                result += "\"" + next.getKey() + "\":{\"have\":\"1\",\"citations\":\"" + next.getValue() + "\",}";
+                result += "\"" + next.getKey() + "\":{\"have\":\"1\",\"citations\":\"" + next.getValue() + "\"},";
             }
 
             result += "},";

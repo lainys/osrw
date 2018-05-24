@@ -15,6 +15,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#menuOpenArticle"
                                   text="Открыть публикацию из файла"/>
                         <MenuItem mnemonicParsing="false" onAction="#menuCleanArticle" text="Очистить поля"/>
+                        <MenuItem mnemonicParsing="false" onAction="#toStartWindow" text="В начало"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Правка">
@@ -22,7 +23,12 @@
                         <MenuItem mnemonicParsing="false" onAction="#menuEditArticle" text="Редактировать публикацию"/>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Помощь">
+                <Menu mnemonicParsing="false" text="Сервер" visible="false">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#changeSettingServer" text="Изменить настройки"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Помощь" visible="false">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#menuAbout" text="О программе"/>
                         <MenuItem mnemonicParsing="false" onAction="#menuHelp" text="Скачать руководство оператора"/>
@@ -32,6 +38,7 @@
         </MenuBar>
     </top>
     <center>
+
         <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
                 <Tab onSelectionChanged="#changeSelection" text="    Информация о публикации    ">

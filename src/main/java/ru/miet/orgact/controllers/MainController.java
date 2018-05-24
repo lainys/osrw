@@ -28,10 +28,13 @@ import java.util.HashMap;
 
 public class MainController {
 
+
+    private int codeEdit;
     static ThirdTabController ttc;
     private String typeWork;
-    private FirstTabController ftc;
-    private SecondTabController stc;
+
+    @FXML
+    private GridPane startWindow;
 
     @FXML
     private BorderPane borderPane;
@@ -55,8 +58,19 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        nextButton.setVisible(false);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/main_window.fxml"));
+            startWindow = loader.load();
 
-        typeWork = "article_add";
+            StartWindow contrl = loader.getController();
+
+            contrl.setMainController(this);
+
+            borderPane.setCenter(startWindow);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -192,7 +206,7 @@ public class MainController {
                                 showMessage("Не выбран раздел");
                                 return false;
                             } else {
-                                article.setTopic(topic.getSelectionModel().getSelectedItem().toString());
+                                article.setTopic(Integer.toString(topic.getSelectionModel().getSelectedIndex() + 1));
                             }
 
                             break;
@@ -358,6 +372,7 @@ public class MainController {
             ObservableList<Node> childs = grid.getChildren();
 
             Journal journal = new Journal();
+            journal.setCode(ttc.getCode());
             for (int i = 0; i < childs.size(); i++) {
                 if (childs.get(i).getId() != null) {
                     switch (childs.get(i).getId()) {
@@ -550,7 +565,7 @@ public class MainController {
                                 showMessage("Не заполнено поле \"Страницы сборника конференции\"");
                                 return false;
                             } else {
-                                //conf.setPages(conferencePages.getText());
+                                conf.setPages(conferencePages.getText());
                             }
                             break;
                         }
@@ -560,6 +575,7 @@ public class MainController {
                                 showMessage("Не заполнено поле \"Ссылка на сборник конференции\"");
                                 return false;
                             } else {
+                                article.setLink(conferenceLink.getText());
                                 //conf.setLink(conferenceLink.getText());
                             }
                             break;
@@ -582,7 +598,7 @@ public class MainController {
     public void showMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
-        alert.setTitle("Успех!");
+        alert.setTitle("Сообщение");
         alert.showAndWait();
     }
 
@@ -594,7 +610,6 @@ public class MainController {
         return alert.getResult().getButtonData().isDefaultButton();
     }
 
-
     public void send() {
         article = new Article();
         if (getFieldsFromFirstTab() && getFieldsFromSecondTab() && getFieldsFromThird()) {
@@ -602,8 +617,6 @@ public class MainController {
                 if (showMessageConfirm("Нет доступа к серверу.\nХотите сохранить публикацию в файл?")) {
                     if (saveArticle()) {
                         showMessage("Публикация успешно сохранена!");
-                    } else {
-                        showMessage("Проблема с сохранением попробуйте снова!");
                     }
                 }
             }
@@ -710,7 +723,12 @@ public class MainController {
                         }
                         case "topic": {
                             ComboBox topic = (ComboBox) (child);
-                            topic.getSelectionModel().select(article.getTopic());
+                            if (article.getTopic().length() > 2) {
+                                topic.getSelectionModel().select(article.getTopic());
+                            } else {
+
+                                topic.getSelectionModel().select(FirstTabController.topics.get(Integer.parseInt(article.getTopic())));
+                            }
 
                             break;
                         }
@@ -852,6 +870,7 @@ public class MainController {
         }
     }
 
+
     public void setBook(Article article, GridPane grid) {
         try {
             ObservableList<Node> childs = grid.getChildren();
@@ -903,6 +922,7 @@ public class MainController {
 
             Gson gson = new Gson();
             Journal journal = gson.fromJson(article.getTypeJson(), Journal.class);
+            ttc.setCode(journal.getCode());
             for (int i = 0; i < childs.size(); i++) {
                 if (childs.get(i).getId() != null) {
                     switch (childs.get(i).getId()) {
@@ -958,6 +978,7 @@ public class MainController {
 
             Gson gson = new Gson();
             Conference conf = gson.fromJson(article.getTypeJson(), Conference.class);
+            ttc.setCode(conf.getCode());
             for (int i = 0; i < childs.size(); i++) {
                 if (childs.get(i).getId() != null) {
                     switch (childs.get(i).getId()) {
@@ -1050,7 +1071,316 @@ public class MainController {
 
     @FXML
     public void menuCleanArticle() {
-        setValue(new Article());
+        clearFirstTab();
+        clearSecondTab();
+        clearThirdTab();
+    }
+
+    public void clearFirstTab() {
+        ArrayList<String> employers = new ArrayList<>();
+        for (Node child : ((GridPane) firstTabPage.getContent()).getChildren()) {
+            if (child.getId() != null) {
+                switch (child.getId()) {
+                    case "nameField": {
+                        TextField nameField = (TextField) child;
+                        nameField.clear();
+                        break;
+                    }
+                    case "authorsFields": {
+                        VBox authorsField = (VBox) child;
+                        ObservableList<Node> vboxChilds = authorsField.getChildren();
+
+                        int len = vboxChilds.size();
+                        vboxChilds.clear();
+                        for (int i = 0; i < len; i++) {
+                            resize_grid(-45, (GridPane) firstTabPage.getContent());
+                        }
+
+                        addAuthor(null, null, vboxChilds, authorsField, (GridPane) firstTabPage.getContent(), employers);
+
+
+                        break;
+                    }
+                    case "yearField": {
+                        TextField yearField = (TextField) child;
+                        yearField.clear();
+                        break;
+                    }
+                    case "countryField": {
+                        TextField countryField = (TextField) child;
+                        countryField.clear();
+
+                        break;
+                    }
+                    case "cityField": {
+                        TextField cityField = (TextField) child;
+                        cityField.clear();
+                        break;
+                    }
+                    case "publishingHouseField": {
+
+                        TextField publishingHouseField = (TextField) child;
+                        publishingHouseField.clear();
+                        break;
+                    }
+                    case "topic": {
+                        ComboBox topic = (ComboBox) (child);
+                        topic.getSelectionModel().clearSelection();
+
+                        break;
+                    }
+                    case "directions": {
+                        CheckComboBox directions = (CheckComboBox) (child);
+                        directions.getCheckModel().clearChecks();
+
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void clearSecondTab() {
+        ObservableList<Node> childs = ((GridPane) secondTabPage.getContent()).getChildren();
+
+        for (int i = 1; i < childs.size(); i += 2) {
+            CheckBox name = (CheckBox) childs.get(i);
+            name.setSelected(false);
+
+            TextField value = (TextField) childs.get(i + 1);
+            value.clear();
+            value.setDisable(true);
+        }
+    }
+
+    public void clearThirdTab() {
+
+        ThirdTabController controller = ttc;
+        ObservableList<Node> childs = thirdTabPage.getChildren();
+        HBox hbox = (HBox) childs.get(1);
+        for (int i = 0; i < hbox.getChildren().size(); i++) {
+            RadioButton radio = (RadioButton) hbox.getChildren().get(i);
+            radio.setSelected(false);
+        }
+
+        GridPane grid = (GridPane) controller.getPlace("book");
+        clearBook(grid);
+        grid = (GridPane) controller.getPlace("journal");
+        clearJournal(grid);
+        grid = (GridPane) controller.getPlace("conference");
+        clearConference(grid);
+        grid = (GridPane) controller.getPlace("other");
+        clearOther(grid);
+        grid = (GridPane) controller.getPlace("findConference");
+        clearFindConf(grid);
+        grid = (GridPane) controller.getPlace("findJournal");
+        clearFindJournal(grid);
+        controller.clear();
+
+    }
+
+    public void clearBook(GridPane grid) {
+        ObservableList<Node> childs = grid.getChildren();
+
+        for (int i = 0; i < childs.size(); i++) {
+            if (childs.get(i).getId() != null) {
+                switch (childs.get(i).getId()) {
+                    case "bookName": {
+                        TextField bookName = (TextField) childs.get(i);
+                        bookName.clear();
+                        break;
+                    }
+                    case "bookPublishingHouse": {
+                        TextField bookPublishingHouse = (TextField) childs.get(i);
+                        bookPublishingHouse.clear();
+                        break;
+                    }
+                    case "bookISBN": {
+                        TextField bookISBN = (TextField) childs.get(i);
+                        bookISBN.clear();
+                        break;
+                    }
+                    case "bookPages": {
+                        TextField bookPages = (TextField) childs.get(i);
+                        bookPages.clear();
+                        break;
+                    }
+                    case "bookLink": {
+                        TextField bookLink = (TextField) childs.get(i);
+                        bookLink.clear();
+                        break;
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    public void clearConference(GridPane grid) {
+        ObservableList<Node> childs = grid.getChildren();
+
+        for (int i = 0; i < childs.size(); i++) {
+            if (childs.get(i).getId() != null) {
+                switch (childs.get(i).getId()) {
+                    case "conferenceName": {
+                        TextField conferenceName = (TextField) childs.get(i);
+                        conferenceName.clear();
+                        break;
+                    }
+                    case "conferenceStart": {
+                        DatePicker conferenceStart = (DatePicker) childs.get(i);
+                        conferenceStart.getEditor().clear();
+
+                        break;
+                    }
+                    case "conferenceFinish": {
+                        DatePicker conferenceFinish = (DatePicker) childs.get(i);
+                        conferenceFinish.getEditor().clear();
+                        break;
+                    }
+                    case "conferenceCountry": {
+                        TextField conferenceCountry = (TextField) childs.get(i);
+                        conferenceCountry.clear();
+                        break;
+                    }
+                    case "conferenceCity": {
+                        TextField conferenceCity = (TextField) childs.get(i);
+                        conferenceCity.clear();
+                        break;
+                    }
+                    case "conferencePages": {
+                        TextField conferencePages = (TextField) childs.get(i);
+                        //
+                        conferencePages.clear();
+                        break;
+                    }
+                    case "conferenceLink": {
+                        TextField conferenceLink = (TextField) childs.get(i);
+                        //
+                        conferenceLink.clear();
+                        break;
+                    }
+
+                }
+
+            }
+        }
+    }
+
+    public void clearJournal(GridPane grid) {
+        ObservableList<Node> childs = grid.getChildren();
+
+        for (int i = 0; i < childs.size(); i++) {
+            if (childs.get(i).getId() != null) {
+                switch (childs.get(i).getId()) {
+                    case "journalName": {
+                        TextField journalName = (TextField) childs.get(i);
+                        journalName.clear();
+                        break;
+                    }
+                    case "journalFactor": {
+                        TextField journalFactor = (TextField) childs.get(i);
+                        journalFactor.clear();
+                        break;
+                    }
+                    case "journalPages": {
+                        TextField journalPages = (TextField) childs.get(i);
+                        journalPages.clear();
+                        break;
+                    }
+                    case "journalLink": {
+                        TextField journalLink = (TextField) childs.get(i);
+                        journalLink.clear();
+                        break;
+                    }
+                    case "journalISSN": {
+                        TextField journalISSN = (TextField) childs.get(i);
+                        journalISSN.clear();
+                        break;
+                    }
+                    case "journalVak": {
+                        CheckBox journalVak = (CheckBox) childs.get(i);
+
+                        journalVak.setSelected(false);
+                        break;
+                    }
+                    case "journalRussian": {
+                        CheckBox journalRussian = (CheckBox) childs.get(i);
+                        journalRussian.setSelected(false);
+                        break;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    public void clearOther(GridPane grid) {
+        ObservableList<Node> childs = grid.getChildren();
+        for (int i = 0; i < childs.size(); i++) {
+            if (childs.get(i).getId() != null) {
+                switch (childs.get(i).getId()) {
+                    case "otherName": {
+                        TextField otherName = (TextField) childs.get(i);
+                        otherName.clear();
+                        break;
+                    }
+                    case "otherLink": {
+                        TextField otherLink = (TextField) childs.get(i);
+                        otherLink.clear();
+                        break;
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    public void clearFindConf(GridPane grid) {
+        ObservableList<Node> childs = grid.getChildren();
+        for (int i = 0; i < childs.size(); i++) {
+            if (childs.get(i).getId() != null) {
+                switch (childs.get(i).getId()) {
+                    case "finderName": {
+                        TextField otherName = (TextField) childs.get(i);
+                        otherName.clear();
+                        break;
+                    }
+                    case "listConference": {
+                        ListView otherLink = (ListView) childs.get(i);
+                        otherLink.getItems().clear();
+                        break;
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    public void clearFindJournal(GridPane grid) {
+        ObservableList<Node> childs = grid.getChildren();
+        for (int i = 0; i < childs.size(); i++) {
+            if (childs.get(i).getId() != null) {
+                switch (childs.get(i).getId()) {
+                    case "finderName": {
+                        TextField otherName = (TextField) childs.get(i);
+                        otherName.clear();
+                        break;
+                    }
+                    case "listJournals": {
+                        ListView otherLink = (ListView) childs.get(i);
+                        otherLink.getItems().clear();
+                        break;
+                    }
+
+                }
+            }
+
+        }
     }
 
     @FXML
@@ -1072,6 +1402,27 @@ public class MainController {
 
     @FXML
     public void menuHelp() {
+    }
+
+    @FXML
+    public void toStartWindow() {
+        borderPane.setCenter(startWindow);
+        nextButton.setVisible(false);
+    }
+
+    @FXML
+    public void buttonEditClick() {
+        typeWork = "article_edit";
+        menuCleanArticle();
+        menuEditArticle();
+    }
+
+    @FXML
+    public void buttonAddClick() {
+        typeWork = "article_add";
+        menuCleanArticle();
+        borderPane.setCenter(tabPane);
+        nextButton.setVisible(true);
     }
 
     @FXML
@@ -1099,11 +1450,16 @@ public class MainController {
         Article fromJson = gson.fromJson(editArticle, Article.class);
 */
         setValue(article);
+        codeEdit = article.getCode();
         typeWork = "article_edit";
         borderPane.setCenter(tabPane);
         nextButton.setVisible(true);
     }
 
+    @FXML
+    public void changeSettingServer() {
+
+    }
 
     public boolean saveArticle() {
         FileChooser fileChooser = new FileChooser();
@@ -1134,15 +1490,19 @@ public class MainController {
                     return true;
                 }
             }
-        } finally {
+        } catch (Exception e) {
             return false;
         }
+        return false;
     }
 
 
     public boolean sendToServer() {
 
         try {
+            if (typeWork.compareTo("article_edit") == 0) {
+                article.setCode(codeEdit);
+            }
             System.out.println(article.toJSON());
             String query = "{";
 
@@ -1155,12 +1515,25 @@ public class MainController {
             Client client = new Client();
             client.sendMessage(query);
             String answer = client.getMessage();
-            showMessage(answer);
+            if (typeWork.compareTo("article_edit") == 0) {
+                if (answer.compareTo("1") == 0) {
+                    showMessage("Успешно изменено!");
+                    menuCleanArticle();
+                    toStartWindow();
+                } else {
+                    showMessage("Ошибка редактирования");
+                }
+            } else {
+                if (answer.compareTo("1") == 0) {
+                    showMessage("Успешно добавлено!");
+                    menuCleanArticle();
+                    toStartWindow();
+                } else {
+                    showMessage("Ошибка добавления");
+                }
+            }
         } catch (Exception e) {
             return false;
-        } finally {
-
-            typeWork = "article_add";
         }
         return true;
     }

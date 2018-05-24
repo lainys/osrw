@@ -20,16 +20,14 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
 
     Insets paddingAuthorBox;
     Font buttonFont;
-    ArrayList<String> list;
+    public static ArrayList<String> list = new ArrayList<>();
 
     private VBox authorsFields;
     private GridPane grid;
 
-    public AddAuthorHandler(VBox parent, GridPane grid, ArrayList employees) {
+    public AddAuthorHandler(VBox parent, GridPane grid) {
         this.authorsFields = parent;
         this.grid = grid;
-        this.list = new ArrayList<>();
-        list.addAll(employees);
 
         buttonFont = new Font("Times new roman", 14);
         paddingAuthorBox = new Insets(0, 10, 0, 10);
@@ -71,6 +69,7 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
         textAuthor.setPrefSize(140, 25);
         textAuthor.setPromptText("Введите ФИО автора");
         TextFields.bindAutoCompletion(textAuthor, list);
+
 
         ComboBox positionBox = new ComboBox();
         positionBox.getItems().addAll("Студент МИЭТ", "Аспирант МИЭТ", "Сотрудник МИЭТ", "Другое");

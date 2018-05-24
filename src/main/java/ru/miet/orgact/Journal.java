@@ -13,19 +13,19 @@ public class Journal {
 
     private String name;
     private String issn;
-    private boolean russian;
-    private boolean vak;
-    private boolean recenz;
-    private boolean isi;
-    private boolean scopus;
-    private boolean rinc;
-    private double impact_factor;
-    private boolean impact_factor_JSR;
+    private String russian;
+    private String vak;
+    private String recenz;
+    private String isi;
+    private String scopus;
+    private String rinc;
+    private String impact_factor;
+    private String impact_factor_JSR;
     private String link;
 
 
     public Journal() {
-
+        code = -1;
     }
 
 
@@ -33,7 +33,6 @@ public class Journal {
         String result = name;
         return result;
     }
-
 
 
     public String getName() {
@@ -53,67 +52,67 @@ public class Journal {
     }
 
     public boolean isRussian() {
-        return russian;
+        return Boolean.parseBoolean(russian);
     }
 
     public void setRussian(boolean russian) {
-        this.russian = russian;
+        this.russian = Boolean.toString(russian);
     }
 
     public boolean isVak() {
-        return vak;
+        return Boolean.parseBoolean(vak);
     }
 
     public void setVak(boolean vak) {
-        this.vak = vak;
+        this.vak = Boolean.toString(vak);
     }
 
     public boolean isRecenz() {
-        return recenz;
+        return Boolean.parseBoolean(recenz);
     }
 
     public void setRecenz(boolean recenz) {
-        this.recenz = recenz;
+        this.recenz = Boolean.toString(recenz);
     }
 
     public boolean isIsi() {
-        return isi;
+        return Boolean.parseBoolean(isi);
     }
 
     public void setIsi(boolean isi) {
-        this.isi = isi;
+        this.isi = Boolean.toString(isi);
     }
 
     public boolean isScopus() {
-        return scopus;
+        return Boolean.parseBoolean(scopus);
     }
 
     public void setScopus(boolean scopus) {
-        this.scopus = scopus;
+        this.scopus = Boolean.toString(scopus);
     }
 
     public boolean isRinc() {
-        return rinc;
+        return Boolean.parseBoolean(rinc);
     }
 
     public void setRinc(boolean rinc) {
-        this.rinc = rinc;
+        this.rinc = Boolean.toString(rinc);
     }
 
     public double getImpact_factor() {
-        return impact_factor;
+        return Double.parseDouble(impact_factor);
     }
 
     public void setImpact_factor(double impact_factor) {
-        this.impact_factor = impact_factor;
+        this.impact_factor = Double.toString(impact_factor);
     }
 
     public boolean isImpact_factor_JSR() {
-        return impact_factor_JSR;
+        return Boolean.parseBoolean(impact_factor_JSR);
     }
 
     public void setImpact_factor_JSR(boolean impact_factor_JSR) {
-        this.impact_factor_JSR = impact_factor_JSR;
+        this.impact_factor_JSR = Boolean.toString(impact_factor_JSR);
     }
 
     public String getLink() {

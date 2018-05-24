@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class FirstTabController {
 
+    public static ArrayList<String> topics = new ArrayList<>();
+
     @FXML
     private TextField nameField;
 
@@ -36,7 +38,7 @@ public class FirstTabController {
 
 
     @FXML
-    private TextField authorField;
+    private TextField author;
 
     @FXML
     private TextField publicHouseField;
@@ -97,17 +99,24 @@ public class FirstTabController {
         yearField.textProperty().addListener(new YearFieldListener(yearField));
         countryField.textProperty().addListener(new StringListener(countryField));
         cityField.textProperty().addListener(new StringListener(cityField));
+        try {
+            ArrayList<String> employees = Client.getEmployees();
+            AddAuthorHandler.list.addAll(employees);
+            TextFields.bindAutoCompletion(author, AddAuthorHandler.list);
 
-        ArrayList<String> employees = Client.getEmployees();
-        TextFields.bindAutoCompletion(authorField, employees);
+            addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid));
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
 
         deleteAuthor.setOnAction(new DeleteAuthorHandler(authorsFields, grid));
 
-        addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid, employees));
         authorsFields.setSpacing(20);
 
         position.getItems().addAll("Студент МИЭТ", "Аспирант МИЭТ", "Сотрудник МИЭТ", "Другое");
         topic.getItems().addAll("Монографии", "Учебники и учебные пособия", "Учебно-методические пособия", "Статьи в зарубежных журналах", "Статьи в российских журналах", "Материалы докладов зарубежных научно-технических конференций", "Материалы докладов научно-технических конференций в России и СНГ", "Статьи в сборниках научных трудов", "Тезисы докладов");
+        topics.addAll(topic.getItems());
         directions.getItems().addAll("Естественные и точные науки", "Техника и технологии", "Медицинские науки и общественное здравоохранение", "Социальные науки", "Гуманитарные науки");
 
     }

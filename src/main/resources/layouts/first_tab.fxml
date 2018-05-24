@@ -54,7 +54,7 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                             <children>
-                                <TextField fx:id="authorField" prefHeight="25.0" prefWidth="140.0"
+                                <TextField fx:id="author" prefHeight="25.0" prefWidth="140.0"
                                            promptText="Введите ФИО автора"/>
                                 <ComboBox fx:id="position" prefHeight="25.0" prefWidth="170.0"
                                           promptText="Выберите должность"/>

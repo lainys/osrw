@@ -6,11 +6,20 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import ru.miet.orgact.Article;
 import ru.miet.orgact.Client;
 import ru.miet.orgact.controllers.MainController;
 
 public class FindArticleForEdit {
+
+    @FXML
+    private TextField cityField;
+
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField yearField;
 
     private MainController mainController;
     @FXML
@@ -29,7 +38,7 @@ public class FindArticleForEdit {
 
     @FXML
     public void initialize() {
-        //ArrayList<Article> publications = Client.getListOfPublications();
+       /* //ArrayList<Article> publications = Client.getListOfPublications();
         ObservableList<Article> list = FXCollections.observableArrayList();
         list.addAll(Client.getArticles());
 
@@ -41,6 +50,7 @@ public class FindArticleForEdit {
         yearColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear().toString()));
 
         selectEditTable.setItems(list);
+        */
     }
 
     public void setMain(MainController contrl) {
@@ -50,5 +60,37 @@ public class FindArticleForEdit {
     public void selectForEdit() {
 
         mainController.edit(selectEditTable.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    public void search() {
+        try {
+            ObservableList<Article> list = FXCollections.observableArrayList();
+            list.addAll(Client.getArticles());
+
+            //установить в таблицу все значения
+            nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+            authorsColumn.setCellValueFactory(cellData -> new SimpleStringProperty(String.join(",", cellData.getValue().getAuthors())));
+            countryColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCountry()));
+            cityColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCity()));
+            yearColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear().toString()));
+
+            String name = nameField.getText().toLowerCase();
+            String year = yearField.getText().toLowerCase();
+            String city = cityField.getText().toLowerCase();
+
+            ObservableList<Article> searchList = FXCollections.observableArrayList();
+
+            for (Article c : list) {
+                if (c.getName().toLowerCase().contains(name) && c.getYear().toString().toLowerCase().contains(year) && c.getCity().toLowerCase().contains(city)) {
+                    searchList.add(c);
+                }
+            }
+
+            selectEditTable.getItems().clear();
+            selectEditTable.setItems(searchList);
+        } catch (Exception e) {
+            mainController.showMessage("Нет соединения с сервером! Попробуйте позже.");
+        }
     }
 }

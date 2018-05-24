@@ -3,6 +3,7 @@ package ru.miet.orgact.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import ru.miet.orgact.Client;
@@ -19,28 +20,41 @@ public class FindConferenceController {
     ListView listConference;
 
     ThirdTabController thirdTab;
+    MainController main;
 
     @FXML
     public void findConference() {
-        String name = finderName.getText();
+        try {
+            String name = finderName.getText();
 
-        ObservableList<Conference> list = FXCollections.observableArrayList();
+            ObservableList<Conference> list = FXCollections.observableArrayList();
 
 
-        ArrayList<Conference> con = Client.getConferences();
-        for (Conference c : con) {
-            if (c.getName().toLowerCase().contains(name)) {
-                list.add(c);
+            ArrayList<Conference> con = Client.getConferences();
+            for (Conference c : con) {
+                if (c.getName().toLowerCase().contains(name)) {
+                    list.add(c);
+                }
             }
+
+            listConference.setItems(list);
+        } catch (Exception e) {
+            showMessage("Нет доступа к серверу! Попробуйте позже.");
         }
 
-        listConference.setItems(list);
+    }
 
+
+    public void showMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.setTitle("Сообщение");
+        alert.showAndWait();
     }
 
     @FXML
     public void notFindConference() {
-        thirdTab.toNotSearch("conference");
+        thirdTab.notFound("conference");
 
     }
 

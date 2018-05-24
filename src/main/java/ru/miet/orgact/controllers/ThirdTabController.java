@@ -19,6 +19,7 @@ public class ThirdTabController {
     JournalController journalController;
 
     boolean findC, findJ;
+    private int code;
     @FXML
     private BorderPane placePanel;
 
@@ -41,7 +42,6 @@ public class ThirdTabController {
 
     @FXML
     private Parent findJournal;
-
 
     public void initialize() {
         MainController.ttc = this;
@@ -135,11 +135,20 @@ public class ThirdTabController {
         }*/
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public void selectConference(Conference conf) {
+        code = conf.getCode();
         conferenceController.setConference(conf);
         findC = true;
         getLayout("conference");
+
         /*try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/place/conference.fxml"));
             Parent source = loader.load();
@@ -152,6 +161,7 @@ public class ThirdTabController {
     }
 
     public void selectJournal(Journal journal) {
+        code = journal.getCode();
         journalController.setJournal(journal);
         findJ = true;
         getLayout("journal");
@@ -170,16 +180,29 @@ public class ThirdTabController {
     public void toSearch(String place) {
         switch (place) {
             case "conference": {
+                code = -1;
                 findC = false;
                 break;
             }
             case "journal": {
+                code = -1;
                 findJ = false;
                 break;
             }
         }
 
         selectPlace(place);
+    }
+
+    public void clear() {
+        placePanel.setCenter(null);
+
+        code = -1;
+    }
+
+    public void notFound(String place) {
+        code = -1;
+        toNotSearch(place);
     }
 
     public void toNotSearch(String place) {
@@ -210,6 +233,13 @@ public class ThirdTabController {
             }
             case "other": {
                 return other;
+            }
+            case "findConference": {
+                return findConference;
+            }
+
+            case "findJournal": {
+                return findJournal;
             }
             default: {
                 return null;

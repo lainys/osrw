@@ -7,10 +7,18 @@ public class Conference {
     private String finish;
     private String country;
     private String city;
-
+    private String pages;
 
     public Conference() {
+        code = -1;
+    }
 
+    public String getPages() {
+        return pages;
+    }
+
+    public void setPages(String pages) {
+        this.pages = pages;
     }
 
     public static void main(String[] args) {
