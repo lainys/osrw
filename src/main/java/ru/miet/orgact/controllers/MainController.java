@@ -444,6 +444,42 @@ public class MainController {
                             }
                             break;
                         }
+                        case "journalRecenz": {
+                            CheckBox journalRecenz = (CheckBox) childs.get(i);
+                            if (journalRecenz.isSelected()) {
+                                journal.setRecenz(true);
+                            } else {
+                                journal.setRecenz(false);
+                            }
+                            break;
+                        }
+                        case "journalRinc": {
+                            CheckBox journalRinc = (CheckBox) childs.get(i);
+                            if (journalRinc.isSelected()) {
+                                journal.setRinc(true);
+                            } else {
+                                journal.setRinc(false);
+                            }
+                            break;
+                        }
+                        case "journalISI": {
+                            CheckBox journalISI = (CheckBox) childs.get(i);
+                            if (journalISI.isSelected()) {
+                                journal.setIsi(true);
+                            } else {
+                                journal.setIsi(false);
+                            }
+                            break;
+                        }
+                        case "journalScopus": {
+                            CheckBox journalScopus = (CheckBox) childs.get(i);
+                            if (journalScopus.isSelected()) {
+                                journal.setScopus(true);
+                            } else {
+                                journal.setScopus(false);
+                            }
+                            break;
+                        }
                     }
                 }
 
@@ -960,6 +996,26 @@ public class MainController {
                         case "journalRussian": {
                             CheckBox journalRussian = (CheckBox) childs.get(i);
                             journalRussian.setSelected(journal.isRussian());
+                            break;
+                        }
+                        case "journalRecenz": {
+                            CheckBox journalRecenz = (CheckBox) childs.get(i);
+                            journalRecenz.setSelected(journal.isRecenz());
+                            break;
+                        }
+                        case "journalISI": {
+                            CheckBox journalISI = (CheckBox) childs.get(i);
+                            journalISI.setSelected(journal.isIsi());
+                            break;
+                        }
+                        case "journalScopus": {
+                            CheckBox journalScopus = (CheckBox) childs.get(i);
+                            journalScopus.setSelected(journal.isScopus());
+                            break;
+                        }
+                        case "journalRinc": {
+                            CheckBox journalRinc = (CheckBox) childs.get(i);
+                            journalRinc.setSelected(journal.isRinc());
                             break;
                         }
                     }

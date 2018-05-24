@@ -11,7 +11,7 @@ import ru.miet.orgact.handlers.NumberListener;
 public class JournalController {
 
 
-    ThirdTabController thirdTabController;
+    private ThirdTabController thirdTabController;
 
     @FXML
     private TextField journalName;
@@ -32,6 +32,18 @@ public class JournalController {
     @FXML
     private CheckBox journalRussian;
 
+    @FXML
+    private CheckBox journalRecenz;
+
+    @FXML
+    private CheckBox journalISI;
+
+    @FXML
+    private CheckBox journalScopus;
+
+    @FXML
+    private CheckBox journalRinc;
+
 
     public void initialize() {
         journalFactor.textProperty().addListener(new DoubleNumberListener(journalFactor));
@@ -48,7 +60,8 @@ public class JournalController {
         journalFactor.clear();
         journalFactor.setText(Double.toString(journal.getImpact_factor()));
         journalPages.clear();
-        journalPages.setText("0");
+        journalPages.setText("");
+        journalPages.clear();
         journalLink.clear();
         journalLink.setText(journal.getLink());
         journalISSN.clear();
@@ -56,6 +69,10 @@ public class JournalController {
 
         journalVak.setSelected(journal.isVak());
         journalRussian.setSelected(journal.isRussian());
+        journalRecenz.setSelected(journal.isRecenz());
+        journalRinc.setSelected(journal.isRinc());
+        journalScopus.setSelected(journal.isScopus());
+        journalISI.setSelected(journal.isIsi());
     }
 
     public void toSearch() {
