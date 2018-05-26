@@ -12,6 +12,15 @@ import java.time.LocalDate;
 public class ConferenceController {
 
     ThirdTabController thirdTabController;
+    MainController main;
+
+    public MainController getMain() {
+        return main;
+    }
+
+    public void setMain(MainController main) {
+        this.main = main;
+    }
 
     @FXML
     private TextField conferenceName;
@@ -44,16 +53,13 @@ public class ConferenceController {
     }
 
     public void setConference(Conference conf) {
+        main.setConferenceOther();
         conferenceName.clear();
         conferenceName.setText(conf.getName());
         conferenceCountry.clear();
         conferenceCountry.setText(conf.getCountry());
         conferenceCity.clear();
         conferenceCity.setText(conf.getCity());
-        conferencePages.clear();
-        conferencePages.setText("0");
-        conferenceLink.clear();
-        conferenceLink.setText("");
         System.out.println(conf.getStart());
         String[] date = conf.getStart().split(". ");
         int year = Integer.parseInt(date[0]);
@@ -76,4 +82,14 @@ public class ConferenceController {
         thirdTabController = contr;
     }
 
+
+    public void clear() {
+        conferenceLink.clear();
+        conferenceFinish.getEditor().clear();
+        conferenceStart.getEditor().clear();
+        conferenceCity.clear();
+        conferenceCountry.clear();
+        conferenceName.clear();
+        conferencePages.clear();
+    }
 }

@@ -29,9 +29,14 @@ import java.util.HashMap;
 public class MainController {
 
 
+    static MainController main;
+
     private int codeEdit;
     static ThirdTabController ttc;
+    Node old;
     private String typeWork;
+    @FXML
+    private MenuItem saveMenu;
 
     @FXML
     private GridPane startWindow;
@@ -54,11 +59,14 @@ public class MainController {
     @FXML
     TabPane tabPane;
 
+
     private Article article;
 
     @FXML
     public void initialize() {
         nextButton.setVisible(false);
+        saveMenu.setVisible(false);
+        MainController.main = this;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/main_window.fxml"));
             startWindow = loader.load();
@@ -66,6 +74,8 @@ public class MainController {
             StartWindow contrl = loader.getController();
 
             contrl.setMainController(this);
+
+            ttc.setMain();
 
             borderPane.setCenter(startWindow);
         } catch (Exception e) {
@@ -222,6 +232,19 @@ public class MainController {
                             }
                             break;
                         }
+
+                        case "doi": {
+
+                            TextField doi = (TextField) child;
+                            if (doi.getText().isEmpty()) {
+                                //showMessage("Не заполнено поле \"Издательство\"");
+                                //return false;
+                                article.setDoi(doi.getText());
+                            } else {
+                                article.setDoi(doi.getText());
+                            }
+                            break;
+                        }
                     }
                 }
             }
@@ -243,8 +266,11 @@ public class MainController {
                 CheckBox name = (CheckBox) childs.get(i);
                 if (name.isSelected()) {
                     TextField value = (TextField) childs.get(i + 1);
-
-                    citations.put(name.getText(), Integer.parseInt(value.getText()));
+                    if (value.getText().isEmpty()) {
+                        citations.put(name.getText(), 0);
+                    } else {
+                        citations.put(name.getText(), Integer.parseInt(value.getText()));
+                    }
                 }
             }
             article.setCitations(citations);
@@ -318,7 +344,7 @@ public class MainController {
                                 showMessage("Не заполнено поле \"Издательство\"");
                                 return false;
                             } else {
-                                book.setPublishingHouse(bookPublishingHouse.getText());
+                                article.setPublishingHouse(bookPublishingHouse.getText());
                             }
                             break;
                         }
@@ -338,7 +364,7 @@ public class MainController {
                                 showMessage("Не заполнено поле \"страницы\"");
                                 return false;
                             } else {
-                                book.setPages(bookPages.getText());
+                                article.setPages(bookPages.getText());
                             }
                             break;
                         }
@@ -348,7 +374,17 @@ public class MainController {
                                 showMessage("Не заполнено поле \"Ссылка на книгу\"");
                                 return false;
                             } else {
-                                book.setLink(bookLink.getText());
+                                article.setLink(bookLink.getText());
+                            }
+                            break;
+                        }
+                        case "bookTom": {
+                            TextField bookTom = (TextField) childs.get(i);
+                            if (bookTom.getText().isEmpty()) {
+                                //showMessage("Не заполнено поле \"Ссылка на книгу\"");
+                                //return false;
+                            } else {
+                                book.setBookTom(bookTom.getText());
                             }
                             break;
                         }
@@ -402,7 +438,7 @@ public class MainController {
                                 showMessage("Не заполнено поле \"Страницы журнала\"");
                                 return false;
                             } else {
-
+                                article.setPages(journalPages.getText());
                             }
                             break;
                         }
@@ -413,6 +449,17 @@ public class MainController {
                                 return false;
                             } else {
                                 journal.setLink(journalLink.getText());
+                            }
+                            break;
+                        }
+
+                        case "journalNumber": {
+                            TextField journalNumber = (TextField) childs.get(i);
+                            if (journalNumber.getText().isEmpty()) {
+                                showMessage("Не заполнено поле \"Номер журнала\"");
+                                return false;
+                            } else {
+                                article.setNumber(journalNumber.getText());
                             }
                             break;
                         }
@@ -518,7 +565,7 @@ public class MainController {
                                 showMessage("Не заполнено поле \"Ссылка на ресурс\"");
                                 return false;
                             } else {
-                                other.setLink(otherLink.getText());
+                                article.setLink(otherLink.getText());
                             }
                             break;
                         }
@@ -542,6 +589,7 @@ public class MainController {
             ObservableList<Node> childs = grid.getChildren();
 
             Conference conf = new Conference();
+            conf.setCode(ttc.getCode());
             for (int i = 0; i < childs.size(); i++) {
                 if (childs.get(i).getId() != null) {
                     switch (childs.get(i).getId()) {
@@ -561,7 +609,7 @@ public class MainController {
                                 showMessage("Не заполнено поле \"Начало конференции\"");
                                 return false;
                             } else {
-                                conf.setStart(conferenceStart.getValue().toString());
+                                conf.setStart(conferenceStart.getValue().toString().replace("-", ". "));
                             }
                             break;
                         }
@@ -571,7 +619,7 @@ public class MainController {
                                 showMessage("Не заполнено поле \"Конец конференции\"");
                                 return false;
                             } else {
-                                conf.setFinish(conferenceFinish.getValue().toString());
+                                conf.setFinish(conferenceFinish.getValue().toString().replace("-", ". "));
                             }
                             break;
                         }
@@ -601,7 +649,7 @@ public class MainController {
                                 showMessage("Не заполнено поле \"Страницы сборника конференции\"");
                                 return false;
                             } else {
-                                conf.setPages(conferencePages.getText());
+                                article.setPages(conferencePages.getText());
                             }
                             break;
                         }
@@ -612,7 +660,6 @@ public class MainController {
                                 return false;
                             } else {
                                 article.setLink(conferenceLink.getText());
-                                //conf.setLink(conferenceLink.getText());
                             }
                             break;
                         }
@@ -675,7 +722,6 @@ public class MainController {
 
         FileChooser chooser = new FileChooser();
         File file = chooser.showOpenDialog(null);
-        System.out.println(file.getName());
         //открыть диалог выбора файлы
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -692,7 +738,16 @@ public class MainController {
 
             setValue(fromJson);
             article = fromJson;
-            System.out.println(fileText);
+            if (article.getCode() > 0) {
+                codeEdit = article.getCode();
+                typeWork = "article_edit";
+            } else {
+                typeWork = "article_add";
+            }
+            System.out.println(typeWork);
+            borderPane.setCenter(tabPane);
+            nextButton.setVisible(true);
+            saveMenu.setVisible(true);
         } catch (Exception e) {
             showMessage("Не возможно открыть файл! Попробуйте снова.");
             e.printStackTrace();
@@ -733,6 +788,12 @@ public class MainController {
                                 addAuthor(authors.get(i), positions.get(i), vboxChilds, authorsField, (GridPane) firstTabPage.getContent(), employers);
                             }
 
+                            break;
+                        }
+
+                        case "doi": {
+                            TextField doi = (TextField) child;
+                            doi.setText(article.getDoi());
                             break;
                         }
                         case "yearField": {
@@ -933,12 +994,17 @@ public class MainController {
                         }
                         case "bookPages": {
                             TextField bookPages = (TextField) childs.get(i);
-                            bookPages.setText(book.getPages());
+                            bookPages.setText(article.getPages());
                             break;
                         }
                         case "bookLink": {
                             TextField bookLink = (TextField) childs.get(i);
                             bookLink.setText(book.getLink());
+                            break;
+                        }
+                        case "bookTom": {
+                            TextField bookTom = (TextField) childs.get(i);
+                            bookTom.setText(book.getBookTom());
                             break;
                         }
 
@@ -974,7 +1040,7 @@ public class MainController {
                         }
                         case "journalPages": {
                             TextField journalPages = (TextField) childs.get(i);
-                            journalPages.setText("");
+                            journalPages.setText(article.getPages());
                             break;
                         }
                         case "journalLink": {
@@ -985,6 +1051,11 @@ public class MainController {
                         case "journalISSN": {
                             TextField journalISSN = (TextField) childs.get(i);
                             journalISSN.setText(journal.getIssn());
+                            break;
+                        }
+                        case "journalNumber": {
+                            TextField journalNumber = (TextField) childs.get(i);
+                            journalNumber.setText(article.getNumber());
                             break;
                         }
                         case "journalVak": {
@@ -1028,6 +1099,66 @@ public class MainController {
         }
     }
 
+    public void setJournalOther() {
+        try {
+            GridPane grid = (GridPane) ttc.getPlace("journal");
+            ObservableList<Node> childs = grid.getChildren();
+
+            for (int i = 0; i < childs.size(); i++) {
+                if (childs.get(i).getId() != null) {
+                    switch (childs.get(i).getId()) {
+
+                        case "journalPages": {
+                            TextField journalPages = (TextField) childs.get(i);
+                            journalPages.setText(article.getPages());
+                            break;
+                        }
+
+                        case "journalNumber": {
+                            TextField journalNumber = (TextField) childs.get(i);
+                            journalNumber.setText(article.getNumber());
+                            break;
+                        }
+
+                    }
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setConferenceOther() {
+        try {
+            GridPane grid = (GridPane) ttc.getPlace("conference");
+            ObservableList<Node> childs = grid.getChildren();
+
+            for (int i = 0; i < childs.size(); i++) {
+                if (childs.get(i).getId() != null) {
+                    switch (childs.get(i).getId()) {
+                        case "conferencePages": {
+                            TextField conferencePages = (TextField) childs.get(i);
+                            //
+                            conferencePages.setText(article.getPages());
+                            break;
+                        }
+                        case "conferenceLink": {
+                            TextField conferenceLink = (TextField) childs.get(i);
+                            //
+                            conferenceLink.setText(article.getLink());
+                            break;
+                        }
+
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setConference(Article article, GridPane grid) {
         try {
             ObservableList<Node> childs = grid.getChildren();
@@ -1046,20 +1177,24 @@ public class MainController {
                         case "conferenceStart": {
                             DatePicker conferenceStart = (DatePicker) childs.get(i);
                             String[] date = conf.getStart().split(". ");
+                            System.out.println("start " + date[0] + " " + date[1] + " " + date[2]);
                             int year = Integer.parseInt(date[0]);
                             int month = Integer.parseInt(date[1]);
                             int day = Integer.parseInt(date[2]);
                             conferenceStart.setValue(LocalDate.of(year, month, day));
+                            conferenceStart.getEditor().setText(conferenceStart.getValue().toString());
 
                             break;
                         }
                         case "conferenceFinish": {
                             DatePicker conferenceFinish = (DatePicker) childs.get(i);
                             String[] date = conf.getFinish().split(". ");
+                            System.out.println("finish " + date[0] + " " + date[1] + " " + date[2]);
                             int year = Integer.parseInt(date[0]);
                             int month = Integer.parseInt(date[1]);
                             int day = Integer.parseInt(date[2]);
                             conferenceFinish.setValue(LocalDate.of(year, month, day));
+                            conferenceFinish.getEditor().setText(conferenceFinish.getValue().toString());
                             break;
                         }
                         case "conferenceCountry": {
@@ -1075,13 +1210,13 @@ public class MainController {
                         case "conferencePages": {
                             TextField conferencePages = (TextField) childs.get(i);
                             //
-                            conferencePages.setText("");
+                            conferencePages.setText(article.getPages());
                             break;
                         }
                         case "conferenceLink": {
                             TextField conferenceLink = (TextField) childs.get(i);
                             //
-                            conferenceLink.setText("");
+                            conferenceLink.setText(article.getLink());
                             break;
                         }
 
@@ -1189,6 +1324,11 @@ public class MainController {
                         CheckComboBox directions = (CheckComboBox) (child);
                         directions.getCheckModel().clearChecks();
 
+                        break;
+                    }
+                    case "doi": {
+                        TextField doi = (TextField) child;
+                        doi.clear();
                         break;
                     }
                 }
@@ -1464,6 +1604,7 @@ public class MainController {
     public void toStartWindow() {
         borderPane.setCenter(startWindow);
         nextButton.setVisible(false);
+        saveMenu.setVisible(false);
     }
 
     @FXML
@@ -1479,6 +1620,7 @@ public class MainController {
         menuCleanArticle();
         borderPane.setCenter(tabPane);
         nextButton.setVisible(true);
+        saveMenu.setVisible(true);
     }
 
     @FXML
@@ -1492,6 +1634,7 @@ public class MainController {
 
             borderPane.setCenter(root);
             nextButton.setVisible(false);
+            saveMenu.setVisible(false);
 
 
         } catch (Exception e) {
@@ -1510,12 +1653,9 @@ public class MainController {
         typeWork = "article_edit";
         borderPane.setCenter(tabPane);
         nextButton.setVisible(true);
+        saveMenu.setVisible(true);
     }
 
-    @FXML
-    public void changeSettingServer() {
-
-    }
 
     public boolean saveArticle() {
         FileChooser fileChooser = new FileChooser();
@@ -1592,6 +1732,28 @@ public class MainController {
             return false;
         }
         return true;
+    }
+
+    @FXML
+    public void changeSettingServer() {
+        old = borderPane.getCenter();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/client_change.fxml"));
+
+            Node n = loader.load();
+
+            ClientSetting contr = loader.getController();
+            contr.setMain(this);
+
+            borderPane.setCenter(n);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void change() {
+        borderPane.setCenter(old);
     }
 
 }

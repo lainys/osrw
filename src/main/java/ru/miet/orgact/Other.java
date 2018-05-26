@@ -6,6 +6,8 @@ public class Other {
     private String link;
 
     public Other() {
+        name = "";
+        link = "";
 
     }
 

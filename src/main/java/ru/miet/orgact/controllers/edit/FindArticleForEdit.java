@@ -20,6 +20,8 @@ public class FindArticleForEdit {
     private TextField nameField;
     @FXML
     private TextField yearField;
+    @FXML
+    private TextField authorField;
 
     private MainController mainController;
     @FXML
@@ -76,13 +78,15 @@ public class FindArticleForEdit {
             yearColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear().toString()));
 
             String name = nameField.getText().toLowerCase();
+            String author = authorField.getText().toLowerCase();
             String year = yearField.getText().toLowerCase();
             String city = cityField.getText().toLowerCase();
 
             ObservableList<Article> searchList = FXCollections.observableArrayList();
 
+
             for (Article c : list) {
-                if (c.getName().toLowerCase().contains(name) && c.getYear().toString().toLowerCase().contains(year) && c.getCity().toLowerCase().contains(city)) {
+                if (c.getName().toLowerCase().contains(name) && c.getYear().toString().toLowerCase().contains(year) && c.getCity().toLowerCase().contains(city) && String.join(" ", c.getAuthors()).toLowerCase().contains(author)) {
                     searchList.add(c);
                 }
             }

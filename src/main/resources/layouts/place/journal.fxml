@@ -17,6 +17,7 @@
         <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="76.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES"/>
         <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES"/>
@@ -94,12 +95,12 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </TextField>
-        <CheckBox fx:id="journalVak" mnemonicParsing="false" text="ВАК" GridPane.columnIndex="1" GridPane.rowIndex="6">
+        <CheckBox fx:id="journalVak" mnemonicParsing="false" text="ВАК" GridPane.columnIndex="1" GridPane.rowIndex="7">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
         </CheckBox>
-        <CheckBox fx:id="journalRussian" mnemonicParsing="false" text="Российский" GridPane.rowIndex="7">
+        <CheckBox fx:id="journalRussian" mnemonicParsing="false" text="Российский" GridPane.rowIndex="8">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
@@ -112,7 +113,7 @@
         </Label>
         <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" mnemonicParsing="false"
                 onAction="#toSearch" prefHeight="16.0" prefWidth="95.0" text="К поиску" underline="true"
-                GridPane.halignment="CENTER" GridPane.rowIndex="10">
+                GridPane.halignment="CENTER" GridPane.rowIndex="11">
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
@@ -120,27 +121,41 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </Button>
-        <CheckBox fx:id="journalRecenz" mnemonicParsing="false" text="Рецензируемый" GridPane.rowIndex="8">
+        <CheckBox fx:id="journalRecenz" mnemonicParsing="false" text="Рецензируемый" GridPane.rowIndex="9">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </CheckBox>
-        <CheckBox fx:id="journalISI" mnemonicParsing="false" text="ISI" GridPane.columnIndex="1" GridPane.rowIndex="7">
+        <CheckBox fx:id="journalISI" mnemonicParsing="false" text="ISI" GridPane.columnIndex="1" GridPane.rowIndex="8">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </CheckBox>
         <CheckBox fx:id="journalScopus" mnemonicParsing="false" text="Scopus" GridPane.columnIndex="1"
-                  GridPane.rowIndex="8">
-            <GridPane.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-            </GridPane.margin>
-        </CheckBox>
-        <CheckBox fx:id="journalRinc" mnemonicParsing="false" text="РИНЦ" GridPane.columnIndex="1"
                   GridPane.rowIndex="9">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </CheckBox>
+        <CheckBox fx:id="journalRinc" mnemonicParsing="false" text="РИНЦ" GridPane.columnIndex="1"
+                  GridPane.rowIndex="10">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </GridPane.margin>
+        </CheckBox>
+        <Label text="Номер выпуска" GridPane.rowIndex="6">
+            <font>
+                <Font size="14.0"/>
+            </font>
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </GridPane.margin>
+        </Label>
+        <TextField fx:id="journalNumber" prefHeight="25.0" prefWidth="140.0" promptText="Ввведите номер выпуска"
+                   GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </GridPane.margin>
+        </TextField>
     </children>
 </GridPane>

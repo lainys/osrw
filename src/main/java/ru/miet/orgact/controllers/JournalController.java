@@ -6,12 +6,12 @@ import javafx.scene.control.TextField;
 import ru.miet.orgact.Journal;
 import ru.miet.orgact.handlers.DoubleNumberListener;
 import ru.miet.orgact.handlers.NegativeNumberListener;
-import ru.miet.orgact.handlers.NumberListener;
 
 public class JournalController {
 
 
     private ThirdTabController thirdTabController;
+    private MainController main;
 
     @FXML
     private TextField journalName;
@@ -23,6 +23,9 @@ public class JournalController {
 
     @FXML
     private TextField journalISSN;
+
+    @FXML
+    private TextField journalNumber;
 
     @FXML
     private TextField journalLink;
@@ -48,20 +51,19 @@ public class JournalController {
     public void initialize() {
         journalFactor.textProperty().addListener(new DoubleNumberListener(journalFactor));
 
-        journalPages.textProperty().addListener(new NumberListener(journalPages));
+        journalPages.textProperty().addListener(new NegativeNumberListener(journalPages));
 
         journalISSN.textProperty().addListener(new NegativeNumberListener(journalISSN));
     }
 
 
     public void setJournal(Journal journal) {
+        main.setJournalOther();
         journalName.clear();
         journalName.setText(journal.getName());
         journalFactor.clear();
         journalFactor.setText(Double.toString(journal.getImpact_factor()));
-        journalPages.clear();
-        journalPages.setText("");
-        journalPages.clear();
+
         journalLink.clear();
         journalLink.setText(journal.getLink());
         journalISSN.clear();
@@ -81,5 +83,28 @@ public class JournalController {
 
     public void setController(ThirdTabController contr) {
         thirdTabController = contr;
+    }
+
+    public void clear() {
+        journalNumber.clear();
+        journalPages.clear();
+        journalLink.clear();
+        journalRecenz.setSelected(false);
+        journalName.clear();
+        journalISSN.clear();
+        journalFactor.clear();
+        journalISI.setSelected(false);
+        journalRinc.setSelected(false);
+        journalRussian.setSelected(false);
+        journalScopus.setSelected(false);
+        journalVak.setSelected(false);
+    }
+
+    public MainController getMain() {
+        return main;
+    }
+
+    public void setMain(MainController main) {
+        this.main = main;
     }
 }

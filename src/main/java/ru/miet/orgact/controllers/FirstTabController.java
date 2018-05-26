@@ -104,12 +104,12 @@ public class FirstTabController {
             AddAuthorHandler.list.addAll(employees);
             TextFields.bindAutoCompletion(author, AddAuthorHandler.list);
 
-            addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid));
         } catch (Exception e) {
             e.printStackTrace();
 
         }
 
+        addAuthor.setOnAction(new AddAuthorHandler(authorsFields, grid));
         deleteAuthor.setOnAction(new DeleteAuthorHandler(authorsFields, grid));
 
         authorsFields.setSpacing(20);

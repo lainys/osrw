@@ -20,6 +20,29 @@ public class Article {
     private ArrayList<Integer> directions;
     private String typeJson;
     private String link;
+    private String pages;
+    private String number;
+    private String doi;
+
+    public Article() {
+        code = -1;
+        name = "";
+        authors = new ArrayList<>();
+        positions = new ArrayList<>();
+        year = Calendar.getInstance().get(Calendar.YEAR);
+        type = "";
+        country = "";
+        city = "";
+        publishingHouse = "";
+        citations = new HashMap<>();
+        topic = "";
+        directions = new ArrayList<>();
+        typeJson = "";
+        pages = "";
+        doi = "";
+        number = "";
+        link = "";
+    }
 
     public Article(String name, ArrayList<String> authors, ArrayList<String> positions, Integer year, String type, String country, String city, String publishingHouse, HashMap<String, Integer> citations, String topic, ArrayList<Integer> directions) {
         this.name = name;
@@ -37,20 +60,28 @@ public class Article {
         this.link = "";
     }
 
-    public Article() {
-        code = -1;
-        name = "";
-        authors = new ArrayList<>();
-        positions = new ArrayList<>();
-        year = Calendar.getInstance().get(Calendar.YEAR);
-        type = "";
-        country = "";
-        city = "";
-        publishingHouse = "";
-        citations = new HashMap<>();
-        topic = "";
-        directions = new ArrayList<>();
-        typeJson = "";
+    public String getDoi() {
+        return doi;
+    }
+
+    public void setDoi(String doi) {
+        this.doi = doi;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getPages() {
+        return pages;
+    }
+
+    public void setPages(String pages) {
+        this.pages = pages;
     }
 
     public static void main(String[] args) {
@@ -80,6 +111,10 @@ public class Article {
 
         result += "\"code\":\"" + code + "\",";
         result += "\"name\":\"" + name + "\",";
+        result += "\"pages\":\"" + pages + "\",";
+        result += "\"doi\":\"" + doi + "\",";
+        result += "\"number\":\"" + number + "\",";
+        result += "\"link\":\"" + link + "\",";
 
         /*if (authors != null) {
             result += "\"authors\":{";

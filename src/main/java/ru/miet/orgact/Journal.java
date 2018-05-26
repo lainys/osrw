@@ -11,6 +11,7 @@ public class Journal {
         this.code = code;
     }
 
+
     private String name;
     private String issn;
     private String russian;
@@ -25,7 +26,20 @@ public class Journal {
 
 
     public Journal() {
+
         code = -1;
+        issn = "";
+        russian = "";
+        vak = "";
+        recenz = "";
+        isi = "";
+        scopus = "";
+        rinc = "";
+        impact_factor = "";
+        impact_factor_JSR = "";
+        link = "";
+
+
     }
 
 
@@ -113,6 +127,67 @@ public class Journal {
 
     public void setImpact_factor_JSR(boolean impact_factor_JSR) {
         this.impact_factor_JSR = Boolean.toString(impact_factor_JSR);
+    }
+
+
+    public String getRussian() {
+        return russian;
+    }
+
+    public void setRussian(String russian) {
+        this.russian = russian;
+    }
+
+    public String getVak() {
+        return vak;
+    }
+
+    public void setVak(String vak) {
+        this.vak = vak;
+    }
+
+    public String getRecenz() {
+        return recenz;
+    }
+
+    public void setRecenz(String recenz) {
+        this.recenz = recenz;
+    }
+
+    public String getIsi() {
+        return isi;
+    }
+
+    public void setIsi(String isi) {
+        this.isi = isi;
+    }
+
+    public String getScopus() {
+        return scopus;
+    }
+
+    public void setScopus(String scopus) {
+        this.scopus = scopus;
+    }
+
+    public String getRinc() {
+        return rinc;
+    }
+
+    public void setRinc(String rinc) {
+        this.rinc = rinc;
+    }
+
+    public void setImpact_factor(String impact_factor) {
+        this.impact_factor = impact_factor;
+    }
+
+    public String getImpact_factor_JSR() {
+        return impact_factor_JSR;
+    }
+
+    public void setImpact_factor_JSR(String impact_factor_JSR) {
+        this.impact_factor_JSR = impact_factor_JSR;
     }
 
     public String getLink() {

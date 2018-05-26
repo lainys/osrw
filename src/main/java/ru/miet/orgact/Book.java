@@ -4,16 +4,24 @@ public class Book {
     private String name;
     private String ISBN;
     private String publishingHouse;
-    private String pages;
     private String link;
+    private String bookTom;
 
     public Book() {
         name = "";
         ISBN = "";
         publishingHouse = "";
-        pages = "";
         link = "";
+        bookTom = "";
 
+    }
+
+    public String getBookTom() {
+        return bookTom;
+    }
+
+    public void setBookTom(String bookTom) {
+        this.bookTom = bookTom;
     }
 
     public String getName() {
@@ -40,13 +48,6 @@ public class Book {
         this.publishingHouse = publishingHouse;
     }
 
-    public String getPages() {
-        return pages;
-    }
-
-    public void setPages(String pages) {
-        this.pages = pages;
-    }
 
     public String getLink() {
         return link;

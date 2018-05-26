@@ -4,16 +4,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="356.0" prefWidth="463.0"
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="426.0" prefWidth="610.0"
             xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ru.miet.orgact.controllers.edit.FindArticleForEdit">
     <center>
-        <TableView fx:id="selectEditTable" prefHeight="194.0" prefWidth="463.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="selectEditTable" prefHeight="178.0" prefWidth="660.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="119.0" text="Название"/>
-                <TableColumn fx:id="authorsColumn" prefWidth="117.0" text="Авторы"/>
-                <TableColumn fx:id="countryColumn" prefWidth="97.0" text="Страна"/>
-                <TableColumn fx:id="cityColumn" prefWidth="68.0" text="Город"/>
-                <TableColumn fx:id="yearColumn" prefWidth="57.0" text="Год"/>
+                <TableColumn fx:id="nameColumn" prefWidth="217.0" text="Название"/>
+                <TableColumn fx:id="authorsColumn" prefWidth="110.0" text="Авторы"/>
+                <TableColumn fx:id="countryColumn" prefWidth="99.0" text="Страна"/>
+                <TableColumn fx:id="cityColumn" prefWidth="105.0" text="Город"/>
+                <TableColumn fx:id="yearColumn" prefWidth="78.0" text="Год"/>
             </columns>
         </TableView>
     </center>
@@ -26,12 +26,13 @@
         </Button>
     </bottom>
     <top>
-        <GridPane BorderPane.alignment="CENTER">
+        <GridPane prefHeight="156.0" prefWidth="610.0" BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="227.0" minWidth="10.0" prefWidth="147.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.0" minWidth="10.0" prefWidth="316.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="282.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="530.0" minWidth="10.0" prefWidth="407.0"/>
             </columnConstraints>
             <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
@@ -53,12 +54,12 @@
                     </GridPane.margin>
                 </TextField>
                 <TextField fx:id="yearField" prefWidth="451.0" promptText="Введите год" GridPane.columnIndex="1"
-                           GridPane.rowIndex="1">
+                           GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label prefHeight="20.0" prefWidth="29.0" text="Год" GridPane.rowIndex="1">
+                <Label prefHeight="20.0" prefWidth="29.0" text="Год" GridPane.rowIndex="2">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -66,7 +67,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </GridPane.margin>
                 </Label>
-                <Label text="Город" GridPane.rowIndex="2">
+                <Label text="Город" GridPane.rowIndex="3">
                     <font>
                         <Font size="14.0"/>
                     </font>
@@ -74,17 +75,31 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </GridPane.margin>
                 </Label>
-                <TextField fx:id="cityField" promptText="Введите город" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <TextField fx:id="cityField" promptText="Введите город" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Button mnemonicParsing="false" onAction="#search" prefHeight="38.0" prefWidth="120.0" text="Поиск"
-                        GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#search"
+                        prefHeight="38.0" prefWidth="120.0" text="Поиск" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                     </GridPane.margin>
                 </Button>
+                <Label prefHeight="20.0" prefWidth="72.0" text="Автор" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="authorField" prefWidth="451.0" promptText="Введите фамилию авторы"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </GridPane.margin>
+                </TextField>
             </children>
         </GridPane>
     </top>

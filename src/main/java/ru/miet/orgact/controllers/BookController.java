@@ -12,9 +12,14 @@ public class BookController {
     @FXML
     private TextField bookPages;
 
+
+    @FXML
+    private TextField bookTom;
+
     @FXML
     public void initialize() {
         bookPages.textProperty().addListener(new NumberListener(bookPages));
         bookISBN.textProperty().addListener(new NegativeNumberListener(bookISBN));
+        bookTom.textProperty().addListener(new NegativeNumberListener(bookTom));
     }
 }

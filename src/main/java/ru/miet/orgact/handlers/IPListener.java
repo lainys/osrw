@@ -4,17 +4,16 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
-public class NegativeNumberListener implements ChangeListener<String> {
-
+public class IPListener implements ChangeListener<String> {
     private TextField field;
 
-    public NegativeNumberListener(TextField text) {
+    public IPListener(TextField text) {
         field = text;
     }
 
     @Override
     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-        String numberMatcher = "^[\\d\\-\\-]+$";
+        String numberMatcher = "^[\\d.]{0,23}$";
         if (!newValue.isEmpty()) {
             if (!newValue.matches(numberMatcher)) {
                 field.setText(oldValue);

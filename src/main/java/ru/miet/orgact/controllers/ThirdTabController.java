@@ -202,6 +202,11 @@ public class ThirdTabController {
 
     public void notFound(String place) {
         code = -1;
+        if (place.equals("conference")) {
+            conferenceController.clear();
+        } else if (place.endsWith("journal")) {
+            journalController.clear();
+        }
         toNotSearch(place);
     }
 
@@ -245,6 +250,11 @@ public class ThirdTabController {
                 return null;
             }
         }
+    }
+
+    public void setMain() {
+        conferenceController.setMain(MainController.main);
+        journalController.setMain(MainController.main);
     }
 
 }

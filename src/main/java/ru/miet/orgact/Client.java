@@ -24,7 +24,11 @@ public class Client {
     }*/
 
     public Client() {
-        Client.ip = "127.0.0.1";
+        reset();
+    }
+
+    public static void reset() {
+        Client.ip = "127.0.0.2";
         //Client.ip = "192.168.1.4";
         Client.port = 9000;
     }
@@ -33,6 +37,11 @@ public class Client {
         Client.ip = ip;
         Client.port = port;
         connect();
+    }
+
+    public static void setSet(String ip, String port) {
+        Client.ip = ip;
+        Client.port = Integer.parseInt(port);
     }
 
     public static void main(String[] args) {
@@ -158,8 +167,13 @@ public class Client {
                 article.setTopic(topics.get(Integer.parseInt(p.get(3)) - 1));
             }
 
+
             // 4 - name
-            article.setName(p.get(4).substring(1, p.get(4).length() - 1));
+            if (p.get(4).equals("None")) {
+                article.setName("");
+            } else {
+                article.setName(p.get(4).substring(1, p.get(4).length() - 1));
+            }
 
             //journal
             // 5 - id_journal
@@ -176,7 +190,11 @@ public class Client {
                 }
             }
             // 6 - number of journal
-
+            if (p.get(6).equals("None")) {
+                article.setNumber("");
+            } else {
+                article.setNumber(p.get(6).substring(1, p.get(6).length() - 1));
+            }
             //conference
             // 7 - id_conference
             if (p.get(7).compareTo("None") != 0) {
@@ -192,30 +210,69 @@ public class Client {
                 }
             }
             // 8 - link
-            article.setLink(p.get(8).substring(1, p.get(8).length() - 1));
+            if (p.get(8).equals("None")) {
+                article.setLink("");
+            } else {
+                article.setLink(p.get(8).substring(1, p.get(8).length() - 1));
+            }
+
             // 9 - country
-            article.setCountry(p.get(9).substring(1, p.get(9).length() - 1));
+            if (p.get(9).equals("None")) {
+                article.setCountry("");
+            } else {
+                article.setCountry(p.get(9).substring(1, p.get(9).length() - 1));
+            }
             // 10 - city
-            article.setCity(p.get(10).substring(1, p.get(10).length() - 1));
+            if (p.get(10).equals("None")) {
+                article.setCity("");
+            } else {
+                article.setCity(p.get(10).substring(1, p.get(10).length() - 1));
+            }
             // 11 - publishing house
-            article.setPublishingHouse(p.get(11).substring(1, p.get(11).length() - 1));
+            if (p.get(11).equals("None")) {
+                article.setPublishingHouse("");
+            } else {
+                article.setPublishingHouse(p.get(11).substring(1, p.get(11).length() - 1));
+            }
             // 12 - year
-            article.setYear(Integer.parseInt(p.get(12)));
+            if (p.get(12).equals("None")) {
+                article.setYear(2018);
+            } else {
+                article.setYear(Integer.parseInt(p.get(12)));
+            }
             // 13 - tom
-
             // 14 - pages
-
+            if (p.get(14).equals("None")) {
+                article.setPages("");
+            } else {
+                article.setPages(p.get(14).substring(1, p.get(14).length() - 1));
+            }
             // 15 - isbn/issn
 
             // 16 - doi
+            if (p.get(16).equals("None")) {
+                article.setDoi("");
+            } else {
+                article.setDoi(p.get(16).substring(1, p.get(16).length() - 1));
+            }
+
 
             if (article.getTypeJson().length() == 0) {
                 if (p.get(11).compareTo("None") != 0) {
                     Book book = new Book();
+                    if (p.get(13).equals("None")) {
+                        book.setBookTom("");
+                    } else {
+                        book.setBookTom(p.get(13).substring(1, p.get(13).length() - 1));
+                    }
                     book.setName(article.getName());
                     book.setLink(article.getLink());
-                    book.setPages(p.get(14).substring(1, p.get(14).length() - 1));
-                    book.setISBN(p.get(12));
+
+                    if (p.get(15).equals("None")) {
+                        book.setISBN("");
+                    } else {
+                        book.setISBN(p.get(15).substring(1, p.get(15).length() - 1));
+                    }
                     book.setPublishingHouse(article.getPublishingHouse());
 
                     Gson gson = new Gson();

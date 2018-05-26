@@ -11,7 +11,8 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Файл">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#menuSaveArticle" text="Сохранить публикацию"/>
+                        <MenuItem fx:id="saveMenu" mnemonicParsing="false" onAction="#menuSaveArticle"
+                                  text="Сохранить публикацию"/>
                         <MenuItem mnemonicParsing="false" onAction="#menuOpenArticle"
                                   text="Открыть публикацию из файла"/>
                         <MenuItem mnemonicParsing="false" onAction="#menuCleanArticle" text="Очистить поля"/>
@@ -23,7 +24,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#menuEditArticle" text="Редактировать публикацию"/>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Сервер" visible="false">
+                <Menu mnemonicParsing="false" text="Сервер">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#changeSettingServer" text="Изменить настройки"/>
                     </items>
