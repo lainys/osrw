@@ -23,6 +23,10 @@ public class Article {
     private String pages;
     private String number;
     private String doi;
+    private String IEEE1;
+    private String IEEE2;
+    private String IEEE3;
+    private String IEEE4;
 
     public Article() {
         code = -1;
@@ -58,6 +62,42 @@ public class Article {
         this.directions = directions;
         this.typeJson = "";
         this.link = "";
+        this.IEEE1 = "";
+        this.IEEE2 = "";
+        this.IEEE3 = "";
+        this.IEEE4 = "";
+    }
+
+    public String getIEEE1() {
+        return IEEE1;
+    }
+
+    public void setIEEE1(String IEEE1) {
+        this.IEEE1 = IEEE1;
+    }
+
+    public String getIEEE2() {
+        return IEEE2;
+    }
+
+    public void setIEEE2(String IEEE2) {
+        this.IEEE2 = IEEE2;
+    }
+
+    public String getIEEE3() {
+        return IEEE3;
+    }
+
+    public void setIEEE3(String IEEE3) {
+        this.IEEE3 = IEEE3;
+    }
+
+    public String getIEEE4() {
+        return IEEE4;
+    }
+
+    public void setIEEE4(String IEEE4) {
+        this.IEEE4 = IEEE4;
     }
 
     public String getDoi() {
@@ -115,6 +155,10 @@ public class Article {
         result += "\"doi\":\"" + doi + "\",";
         result += "\"number\":\"" + number + "\",";
         result += "\"link\":\"" + link + "\",";
+        result += "\"IEEE1\":\"" + IEEE1 + "\",";
+        result += "\"IEEE2\":\"" + IEEE2 + "\",";
+        result += "\"IEEE3\":\"" + IEEE3 + "\",";
+        result += "\"IEEE4\":\"" + IEEE4 + "\",";
 
         /*if (authors != null) {
             result += "\"authors\":{";

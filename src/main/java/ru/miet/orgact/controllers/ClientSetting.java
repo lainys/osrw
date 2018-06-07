@@ -19,6 +19,12 @@ public class ClientSetting {
     public void initialize() {
         ip.textProperty().addListener(new IPListener(ip));
         port.textProperty().addListener(new NumberListener(port));
+        setValue();
+    }
+
+    public void setValue() {
+        ip.setText(Client.getIP());
+        port.setText(Client.getPort());
     }
 
     @FXML
@@ -30,7 +36,7 @@ public class ClientSetting {
     @FXML
     public void reset() {
         Client.reset();
-        main.showMessage("Установлены сетевые параметры по умолчанию");
+        main.showMessage("Установлены сетевые настройки по умолчанию");
         main.change();
     }
 

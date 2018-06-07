@@ -95,7 +95,8 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </TextField>
-        <CheckBox fx:id="journalVak" mnemonicParsing="false" text="ВАК" GridPane.columnIndex="1" GridPane.rowIndex="7">
+        <CheckBox fx:id="journalVak" mnemonicParsing="false" text="Входит в ВАК" GridPane.columnIndex="1"
+                  GridPane.rowIndex="7">
             <GridPane.margin>
                 <Insets left="10.0" right="10.0"/>
             </GridPane.margin>
@@ -126,18 +127,19 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </CheckBox>
-        <CheckBox fx:id="journalISI" mnemonicParsing="false" text="ISI" GridPane.columnIndex="1" GridPane.rowIndex="8">
+        <CheckBox fx:id="journalISI" mnemonicParsing="false" text="Содержится в ISI" GridPane.columnIndex="1"
+                  GridPane.rowIndex="8">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </CheckBox>
-        <CheckBox fx:id="journalScopus" mnemonicParsing="false" text="Scopus" GridPane.columnIndex="1"
+        <CheckBox fx:id="journalScopus" mnemonicParsing="false" text="Содержится в Scopus" GridPane.columnIndex="1"
                   GridPane.rowIndex="9">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </CheckBox>
-        <CheckBox fx:id="journalRinc" mnemonicParsing="false" text="РИНЦ" GridPane.columnIndex="1"
+        <CheckBox fx:id="journalRinc" mnemonicParsing="false" text="Содержится в РИНЦ" GridPane.columnIndex="1"
                   GridPane.rowIndex="10">
             <GridPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
@@ -157,5 +159,10 @@
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </GridPane.margin>
         </TextField>
+        <CheckBox fx:id="journalJSR" mnemonicParsing="false" text="импакт-фактор JSR" GridPane.rowIndex="7">
+            <GridPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </GridPane.margin>
+        </CheckBox>
     </children>
 </GridPane>

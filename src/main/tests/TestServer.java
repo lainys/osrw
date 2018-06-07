@@ -48,7 +48,7 @@ public class TestServer {
         int countTrue = 0;
         int countFalse = 0;
         int countError = 0;
-        int maxClients = 50;
+        int maxClients = 100;
         String query = "{\'type\':\'get_info\',\'data\':{\'name\':\'Сотрудники\', \"fields\": [\"ФИО_сотрудника\"]}}";
         Client startClient = new Client();
         startClient.sendMessage(query);

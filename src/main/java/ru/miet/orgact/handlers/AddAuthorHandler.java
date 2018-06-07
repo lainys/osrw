@@ -41,7 +41,7 @@ public class AddAuthorHandler implements EventHandler<ActionEvent> {
 
     public void button_add() {
         int len = authorsFields.getChildren().size();
-        if (len <= 11) {
+        if (len <= 21) {
             authorsFields.getChildren().add(len, getNextAuthorBox());
             resize_grid(45);
         }

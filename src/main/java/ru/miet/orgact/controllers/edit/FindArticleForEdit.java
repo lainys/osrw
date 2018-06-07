@@ -95,6 +95,7 @@ public class FindArticleForEdit {
             selectEditTable.setItems(searchList);
         } catch (Exception e) {
             mainController.showMessage("Нет соединения с сервером! Попробуйте позже.");
+            e.printStackTrace();
         }
     }
 }

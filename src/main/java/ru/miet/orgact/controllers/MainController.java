@@ -28,12 +28,14 @@ import java.util.HashMap;
 
 public class MainController {
 
-
     static MainController main;
 
     private int codeEdit;
+
     static ThirdTabController ttc;
+
     Node old;
+
     private String typeWork;
     @FXML
     private MenuItem saveMenu;
@@ -59,11 +61,11 @@ public class MainController {
     @FXML
     TabPane tabPane;
 
-
     private Article article;
 
     @FXML
     public void initialize() {
+        System.setProperty("file.encoding", "UTF8");
         nextButton.setVisible(false);
         saveMenu.setVisible(false);
         MainController.main = this;
@@ -117,130 +119,183 @@ public class MainController {
     public boolean getFieldsFromFirstTab() {
 
         try {
-
+            // просматриваем все элементы GridPane
             for (Node child : ((GridPane) firstTabPage.getContent()).getChildren()) {
+                // проверяем по id элемента
                 if (child.getId() != null) {
                     switch (child.getId()) {
                         case "nameField": {
+                            // обработка названия публикации
                             TextField nameField = (TextField) child;
+
                             if (nameField.getText().isEmpty()) {
+                                // если не заполнено поле название, выводим сообщение
                                 showMessage("Не заполнено поле \"Название публикации\"");
                                 return false;
                             } else {
+                                // есди заполнено, то заполняем объект публикации
                                 article.setName(nameField.getText());
                             }
                             break;
                         }
                         case "authorsFields": {
+                            // обработка авторов публикации
+                            // Box содержащий всех авторов
                             VBox authorsField = (VBox) child;
                             ObservableList<Node> vboxChilds = authorsField.getChildren();
+
                             ArrayList<String> authors = new ArrayList<>();
                             ArrayList<String> positions = new ArrayList<>();
 
+                            // если размер Box равен 0, то ни одного автора не добавили, выводим сообщение об ошибке
                             if (vboxChilds.size() == 0) {
                                 showMessage("Не указано ни одного автора");
                                 return false;
                             }
+
+                            // проходим по всем авторам
                             for (int i = 0; i < vboxChilds.size(); i++) {
+                                // текущий автор
                                 HBox currentAuthor = (HBox) vboxChilds.get(i);
+                                // фио автора
                                 TextField name = (TextField) currentAuthor.getChildren().get(0);
+                                // должность авторы
                                 ComboBox position = (ComboBox) currentAuthor.getChildren().get(1);
 
+
+                                //проверяем фио
                                 if (name.getText().isEmpty()) {
+
+                                    // если фио пустое, выводим сообщение об ошибке
                                     showMessage("Не введено имя одного из авторов");
                                     return false;
                                 } else {
-
+                                    // если не пустое, добавляем в список авторов
                                     authors.add(name.getText());
                                 }
 
+                                // проверяем должность
                                 if (position.getSelectionModel().getSelectedIndex() == -1) {
+                                    // если должность не выбрана, выводим сообщение об ошибке
                                     showMessage("Не выбрана должность для одного из авторов");
                                     return false;
                                 } else {
-
+                                    // если должность выбрана, добавляет в список для текущего автора
                                     positions.add(position.getSelectionModel().getSelectedItem().toString());
                                 }
                             }
 
+                            // заполняем авторов и их должности для публикации
                             article.setAuthors(authors);
                             article.setPositions(positions);
 
                             break;
                         }
                         case "yearField": {
+                            // обработка поля год
                             TextField yearField = (TextField) child;
+
+                            // проверяем, что поле не пустое
                             if (yearField.getText().isEmpty()) {
+                                // если пустое, то выводим сообщение об ошибке
                                 showMessage("Не заполнено поле \"Год\"");
                                 return false;
                             } else {
+                                // иначе добавляем год публикции
                                 article.setYear(Integer.parseInt(yearField.getText()));
                             }
                             break;
                         }
                         case "countryField": {
+                            // обработка поля страна
                             TextField countryField = (TextField) child;
+
+                            // проверяем, что поле не пустое
                             if (countryField.getText().isEmpty()) {
+                                // если пустое, то выводим сообщение об ошибке
                                 showMessage("Не заполнено поле \"Страна\"");
                                 return false;
                             } else {
+                                // иначе добавление страну публикации
                                 article.setCountry(countryField.getText());
                             }
 
                             break;
                         }
                         case "cityField": {
+                            // обработка поля город
                             TextField cityField = (TextField) child;
+
+                            // проверяем, что поле не пустое
                             if (cityField.getText().isEmpty()) {
+                                // если поле пустое, то выводим сообщение об ошибке
                                 showMessage("Не заполнено поле \"Город\"");
                                 return false;
                             } else {
+                                // иначе добавляем город публикации
                                 article.setCity(cityField.getText());
                             }
                             break;
                         }
                         case "publishingHouseField": {
-
+                            // обрабоотка поля издательство
                             TextField publishingHouseField = (TextField) child;
+
+                            // проверяем, что поле не пустое
                             if (publishingHouseField.getText().isEmpty()) {
+                                // если поле пустое, то выводим сообщение об ошибке
                                 showMessage("Не заполнено поле \"Издательство\"");
                                 return false;
                             } else {
+                                // иначе заполняем издательство публикации
                                 article.setPublishingHouse(publishingHouseField.getText());
                             }
                             break;
                         }
                         case "topic": {
+                            // обработка поля раздел
                             ComboBox topic = (ComboBox) (child);
+
+                            // проверяем выбран ли раздел
                             if (topic.getSelectionModel().getSelectedIndex() == -1) {
+                                // если раздел не выбран, то выводим сообщение об ошибке
                                 showMessage("Не выбран раздел");
                                 return false;
                             } else {
+                                // иначе раздел выбран, то добавляем раздел публикации
                                 article.setTopic(Integer.toString(topic.getSelectionModel().getSelectedIndex() + 1));
                             }
 
                             break;
                         }
                         case "directions": {
+                            // обработка поля направление
                             CheckComboBox directions = (CheckComboBox) (child);
+
+                            // проверяем, что выбрано хотя бы одно направление
                             if (directions.getCheckModel().getCheckedIndices().size() == 0) {
+                                // если направление не выбрано, то выводим сообщение об ошибке
                                 showMessage("Не выбранo направление");
-                                return false;
+                                //return false;
                             } else {
-                                //article.setDirections(directions.getCheckModel().getCheckedIndices(), directions.getCheckModel().getItemCount());
+                                // иначе добавляем направление публикации
                                 article.setDirections(directions.getCheckModel().getCheckedIndices());
                             }
                             break;
                         }
 
                         case "doi": {
-
+                            // обработка поля для DOI
                             TextField doi = (TextField) child;
+
+                            // если поле пустое
                             if (doi.getText().isEmpty()) {
-                                //showMessage("Не заполнено поле \"Издательство\"");
+                                // то выводим сообщение об ошибке
+                                //showMessage("Не заполнено поле \"DOI\"");
                                 //return false;
                                 article.setDoi(doi.getText());
                             } else {
+                                // иначе добавляем в публикацию
                                 article.setDoi(doi.getText());
                             }
                             break;
@@ -261,7 +316,7 @@ public class MainController {
 
             HashMap<String, Integer> citations = new HashMap<>();
 
-            for (int i = 1; i < childs.size(); i += 2) {
+            for (int i = 1; i < childs.size() - 4; i += 2) {
 
                 CheckBox name = (CheckBox) childs.get(i);
                 if (name.isSelected()) {
@@ -273,6 +328,33 @@ public class MainController {
                     }
                 }
             }
+
+            CheckBox IEEE1 = (CheckBox) childs.get(childs.size() - 4);
+            if (IEEE1.isSelected()) {
+                article.setIEEE1("1");
+            } else {
+                article.setIEEE1("0");
+            }
+            CheckBox IEEE2 = (CheckBox) childs.get(childs.size() - 3);
+            if (IEEE2.isSelected()) {
+                article.setIEEE2("1");
+            } else {
+                article.setIEEE2("0");
+            }
+            CheckBox IEEE3 = (CheckBox) childs.get(childs.size() - 2);
+            if (IEEE3.isSelected()) {
+                article.setIEEE3("1");
+            } else {
+                article.setIEEE3("0");
+            }
+            CheckBox IEEE4 = (CheckBox) childs.get(childs.size() - 1);
+            if (IEEE4.isSelected()) {
+                article.setIEEE4("1");
+            } else {
+                article.setIEEE4("0");
+            }
+
+
             article.setCitations(citations);
         } catch (Exception e) {
             e.printStackTrace();
@@ -281,29 +363,40 @@ public class MainController {
         return true;
     }
 
+    // получение информации с третьей панели
     public boolean getFieldsFromThird() {
         try {
+            // получаем все элементы панели
             ObservableList<Node> childs = thirdTabPage.getChildren();
+            // получаем элемент RadioButton
             HBox hbox = (HBox) childs.get(1);
+            // получаем активную панель
             GridPane grid = (GridPane) ((BorderPane) ((ScrollPane) childs.get(3)).getContent()).getCenter();
+            // проходим по всем RadioButton
             for (Node n : hbox.getChildren()) {
+                // текущий
                 RadioButton radio = (RadioButton) n;
+                // если текущий выбран, смотрим его id
                 if (radio.isSelected()) {
                     if (n.getId() != null) {
                         switch (n.getId()) {
                             case "book": {
+                                // если книга
                                 if (!getFieldsFromBook(grid)) return false;
                                 break;
                             }
                             case "journal": {
+                                // если журнал
                                 if (!getFieldsFromJournal(grid)) return false;
                                 break;
                             }
                             case "conference": {
+                                // если конференция
                                 if (!getFieldsFromConference(grid)) return false;
                                 break;
                             }
                             case "other": {
+                                // если другое
                                 if (!getFieldsFromOther(grid)) return false;
                                 break;
                             }
@@ -479,6 +572,15 @@ public class MainController {
                                 journal.setVak(true);
                             } else {
                                 journal.setVak(false);
+                            }
+                            break;
+                        }
+                        case "journalJSR": {
+                            CheckBox journalJSR = (CheckBox) childs.get(i);
+                            if (journalJSR.isSelected()) {
+                                journal.setImpact_factor_JSR(true);
+                            } else {
+                                journal.setImpact_factor_JSR(false);
                             }
                             break;
                         }
@@ -682,6 +784,7 @@ public class MainController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
         alert.setTitle("Сообщение");
+        alert.setHeaderText("");
         alert.showAndWait();
     }
 
@@ -915,7 +1018,31 @@ public class MainController {
                 }
 
             }
-            article.setCitations(citations);
+            CheckBox IEEE1 = (CheckBox) childs.get(childs.size() - 4);
+            if (article.getIEEE1().compareTo("1") == 0) {
+                IEEE1.setSelected(true);
+            } else {
+                IEEE1.setSelected(false);
+            }
+            CheckBox IEEE2 = (CheckBox) childs.get(childs.size() - 3);
+            if (article.getIEEE2().compareTo("1") == 0) {
+                IEEE2.setSelected(true);
+            } else {
+                IEEE2.setSelected(false);
+            }
+            CheckBox IEEE3 = (CheckBox) childs.get(childs.size() - 2);
+            if (article.getIEEE3().compareTo("1") == 0) {
+                IEEE3.setSelected(true);
+            } else {
+                IEEE3.setSelected(false);
+            }
+            CheckBox IEEE4 = (CheckBox) childs.get(childs.size() - 1);
+            if (article.getIEEE4().compareTo("1") == 0) {
+                IEEE4.setSelected(true);
+            } else {
+                IEEE4.setSelected(false);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -966,7 +1093,6 @@ public class MainController {
             e.printStackTrace();
         }
     }
-
 
     public void setBook(Article article, GridPane grid) {
         try {
@@ -1062,6 +1188,12 @@ public class MainController {
                             CheckBox journalVak = (CheckBox) childs.get(i);
 
                             journalVak.setSelected(journal.isVak());
+                            break;
+                        }
+                        case "journalJSR": {
+                            CheckBox journalJSR = (CheckBox) childs.get(i);
+
+                            journalJSR.setSelected(journal.isImpact_factor_JSR());
                             break;
                         }
                         case "journalRussian": {
@@ -1339,7 +1471,7 @@ public class MainController {
     public void clearSecondTab() {
         ObservableList<Node> childs = ((GridPane) secondTabPage.getContent()).getChildren();
 
-        for (int i = 1; i < childs.size(); i += 2) {
+        for (int i = 1; i < childs.size() - 4; i += 2) {
             CheckBox name = (CheckBox) childs.get(i);
             name.setSelected(false);
 
@@ -1581,7 +1713,7 @@ public class MainController {
 
     @FXML
     public void menuAbout() {
-        if (showMessageConfirm("Вы нажали на кнопку 'О прогорамме'\nНе знаю помогло ли вам это или нет\nНо всё-таки помогло?")) {
+        if (showMessageConfirm("Вы нажали на кнопку 'О программе'\nНе знаю помогло ли вам это или нет\nНо всё-таки помогло?")) {
             showMessage("Хорошо, спасибо\nЗаходите сюда почаще");
         } else {
             if (showMessageConfirm("Нет? Ну и ладно\nПодумайте ещё раз, может всё-таки да?")) {
@@ -1656,7 +1788,6 @@ public class MainController {
         saveMenu.setVisible(true);
     }
 
-
     public boolean saveArticle() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Сохранение публикации в файл");
@@ -1691,7 +1822,6 @@ public class MainController {
         }
         return false;
     }
-
 
     public boolean sendToServer() {
 
@@ -1745,6 +1875,7 @@ public class MainController {
 
             ClientSetting contr = loader.getController();
             contr.setMain(this);
+            contr.setValue();
 
             borderPane.setCenter(n);
         } catch (Exception e) {
